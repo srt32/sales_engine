@@ -1,7 +1,7 @@
-# require_relative './Transaction'
+require_relative './transaction'
 
 class TransactionRepository
-  attr_reader :file_path
+  attr_reader :file_path, :id
 
   def initialize(file_path = "")
     @file_path = file_path
@@ -22,7 +22,23 @@ class TransactionRepository
       :updated_at => transaction["updated_at"])}
   end
 
+  %w(id invoice_id credit_card_number credit_card_expiration_date result created_at updated_at).each do |attribute| 
+    define_method("find_by_#{attribute}") do |criteria|
+    all.find{|t| t.send(attribute) == criteria}
+    end
+  end
+
+  %w(id invoice_id credit_card_number credit_card_expiration_date result created_at updated_at).each do |attribute| 
+    define_method("find_all_by_#{attribute}") do |criteria|
+    all.find_all{|t| t.send(attribute) == criteria}
+    end
+  end
+
   def open_file
     CSV.open file_path, headers: true
+  end
+
+  def random
+    all.sample
   end
 end
