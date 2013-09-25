@@ -2,7 +2,8 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'csv'
-require_relative '../lib/transaction_repository.rb'
+
+require_relative '../lib/transaction_repository'
 
 class TransactionRepositoryTest < Minitest::Test 
 
@@ -14,30 +15,18 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal "./test/fixtures/transaction_test.csv", @instance.file_path
   end
 
-  def test_open_file_with_default_file_path
-    loaded_data =  @instance.open_file
-    assert_kind_of CSV, loaded_data
-  end
-
-  def test_all_method_exists
-    assert_respond_to @instance, :all
-  end
-
   def test_that_repo_is_populated_with_data
     assert_equal 10, @instance.all.count
   end
 
   def test_that_all_attributes_make_it_through_the_parsing
-    transactions =  @instance.all
-    first_transaction = transactions[0]
+    first_transaction = @instance.all[0]
     assert_equal "1", first_transaction.id
     assert_equal "1", first_transaction.invoice_id
     assert_equal "4654405418249632", first_transaction.credit_card_number
     assert_equal "2012-03-27 14:54:09 UTC", first_transaction.created_at
     assert_equal "2012-03-27 14:54:09 UTC", first_transaction.updated_at
-    assert_nil(first_transaction.credit_card_expiration_date)
-    # binding.pry
-    #assert_equal "success", first_transaction.result
+    assert_equal "success", first_transaction.result
   end 
 
   def test_it_returns_correct_single_transaction_by_attributes
@@ -46,14 +35,16 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal "4654405418249632", @instance.find_by_credit_card_number("4654405418249632").credit_card_number
     assert_equal "2012-03-27 14:54:09 UTC", @instance.find_by_created_at("2012-03-27 14:54:09 UTC").created_at
     assert_equal "2012-03-27 14:54:09 UTC", @instance.find_by_updated_at("2012-03-27 14:54:09 UTC").updated_at
+    assert_equal "success", @instance.find_by_result("success").result
   end
 
   def test_it_returns_find_all
-    assert_equal 2, @instance.find_all_by_id("1").count
+    assert_equal 1, @instance.find_all_by_id("1").count
     assert_equal 2, @instance.find_all_by_invoice_id("1").count
     assert_equal 2, @instance.find_all_by_credit_card_number("4654405418249632").count
     assert_equal 8, @instance.find_all_by_created_at("2012-03-27 14:54:10 UTC").count
     assert_equal 8, @instance.find_all_by_updated_at("2012-03-27 14:54:10 UTC").count
+    assert_equal 10, @instance.find_all_by_result("success").count
   end
 
   def test_it_returns_empty_array_for_all_name_when_no_results
