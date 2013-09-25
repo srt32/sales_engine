@@ -23,4 +23,24 @@ class SalesEngine
     CustomerRepository.new(filepath)
   end
 
+  def invoice_item_repository(filepath= "./data/invoice_items.csv")
+    InvoiceItemRepository.new(filepath)
+  end
+
+  def invoice_repository(filepath= "./data/invoices.csv")
+    InvoiceRepository.new(filepath)
+  end
+
+  def item_repository(filepath = "")
+    ItemRepository.new(filepath)
+  end
+
+  def merchant_repository(filepath = "")
+    MerchantRepository.new(filepath)
+  end
+
+  def transaction_repository(filepath = "")
+    TransactionRepository.new(filepath)
+  end
+
 end

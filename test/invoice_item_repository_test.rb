@@ -2,10 +2,10 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/invoice_item_repository'
 
-class InvoiceItemsRepositoryTest < Minitest::Test
+class InvoiceItemRepositoryTest < Minitest::Test
   
   def setup
-    @iir = InvoiceItemsRepository.new("./test/fixtures/invoice_item_test.csv")
+    @iir = InvoiceItemRepository.new("./test/fixtures/invoice_item_test.csv")
   end
 
   def test_it_is_initialized_with_a_filepath
