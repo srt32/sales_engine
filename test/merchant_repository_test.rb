@@ -12,15 +12,6 @@ class MerchantRepositoryTest < MiniTest::Test
     assert_equal "./test/fixtures/merchants_test.csv", @mr.file_path
   end
 
-  def test_open_file_has_default_file_path
-    loaded_data = @mr.open_file
-    assert_kind_of CSV, loaded_data
-  end
-
-  def test_it_has_an_all_method
-    assert_respond_to @mr, :all
-  end
-
   def test_it_populates_all_array_from_csv
     assert_equal 6, @mr.all.count
   end
