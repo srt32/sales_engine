@@ -23,7 +23,6 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_it_populates_all_array_from_csv
     customer_repository = CustomerRepository.new("./test/fixtures/customers_test.csv")
-    customer_repository.all
     assert_equal 5, customer_repository.all.count
   end
 
@@ -36,7 +35,6 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal "Ondricka", first_customer.last_name
     assert_equal "2012-03-27 14:54:09 UTC", first_customer.created_at
     assert_equal "2012-03-27 14:54:09 UTC", first_customer.updated_at
-
     assert_equal "1", first_customer.id
   end
 
