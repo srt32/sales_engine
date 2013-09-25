@@ -6,6 +6,8 @@ require_relative 'merchant_repository'
 require_relative 'merchant'
 #require_relative 'transaction_repository'
 require_relative 'transaction'
+require_relative 'invoice_item_repository'
+require_relative 'invoice_item'
 
 class SalesEngine
 
