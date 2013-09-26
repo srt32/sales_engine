@@ -1,4 +1,4 @@
-class InvoiceItemsRepository
+class InvoiceItemRepository
   
   attr_reader :file_path
 
@@ -16,7 +16,7 @@ class InvoiceItemsRepository
 
   def create_invoice_items
     csv_data = open_file
-    all = csv_data.collect{|row| InvoiceItems.new(:id => row["id"],
+    all = csv_data.collect{|row| InvoiceItem.new(:id => row["id"],
                                               :item_id => row["item_id"],
                                               :invoice_id => row["invoice_id"],
                                               :quantity => row["quantity"],

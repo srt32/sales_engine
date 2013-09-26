@@ -1,15 +1,15 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/invoice_items'
+require_relative '../lib/invoice_item'
 
-class InvoiceItemsTest < MiniTest::Test
+class InvoiceItemTest < MiniTest::Test
 
   def setup
-    @ii = InvoiceItems.new
+    @ii = InvoiceItem.new
   end
 
   def test_it_can_be_given_all_its_attributes
-    item = InvoiceItems.new(:id => "1",
+    item = InvoiceItem.new(:id => "1",
                             :item_id => "100",
                             :invoice_id => "99",
                             :quantity => "4",
