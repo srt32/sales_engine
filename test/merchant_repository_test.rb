@@ -53,4 +53,19 @@ class MerchantRepositoryTest < MiniTest::Test
     assert_equal [], merchants
   end
 
+  def test_it_return_items_collection_given_a_merchant
+    skip
+    first_merchant = @mr.find_by_id("1")                       
+    first_merchant_items = first_merchant.items
+    assert_equal 4, first_merchant_items.count
+    assert_equal "Item Qui Esse", first_merchant_items[0].name
+  end
+
+  def test_it_returns_invoices_collection_given_a_merchant
+    skip
+    first_merchant = @mr.find_by_id("1")
+    first_merchant_invoices = first_merchant.invoices
+    assert_equal 2, first_merchant_invoices.count
+  end
+
 end

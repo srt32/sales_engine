@@ -20,6 +20,26 @@ class SalesEngineTest < MiniTest::Test
     assert_respond_to @se, :customer_repository
   end
 
+  def test_it_responds_to_invoice_item_repo
+    assert_respond_to @se, :invoice_item_repository
+  end
+
+  def test_it_responds_to_invoice_respository
+    assert_respond_to @se, :invoice_repository
+  end
+
+  def test_it_responds_to_item_repo
+    assert_respond_to @se, :item_repository
+  end
+
+  def test_it_responds_to_merchant_repository
+    assert_respond_to @se, :merchant_repository
+  end
+
+  def test_it_responds_to_transaction_repository
+    assert_respond_to @se, :transaction_repository
+  end
+
   def test_it_returns_collection_of_customers_with_customer_repo_all_command
     customers = @se.customer_repository("./test/fixtures/customers_test.csv").all
     assert_equal 5, customers.count
