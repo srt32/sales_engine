@@ -23,27 +23,27 @@ class SalesEngine
     
   end
 
-  def customer_repository(filepath= "#{data}/customers_test.csv")
+  def customer_repository(filepath= "#{data}/customers.csv")
     CustomerRepository.new(filepath)
   end
 
-  def invoice_item_repository(filepath= "#{data}/invoice_item_test.csv")
+  def invoice_item_repository(filepath= "#{data}/invoice_items.csv")
     InvoiceItemRepository.new(filepath)
   end
 
-  def invoice_repository(filepath= "#{data}/invoice_test.csv")
+  def invoice_repository(filepath= "#{data}/invoices.csv")
     InvoiceRepository.new(filepath)
   end
 
-  def item_repository(filepath = "#{data}/items_test.csv")
+  def item_repository(filepath = "#{data}/items.csv")
     ItemRepository.new(filepath)
   end
 
-  def merchant_repository(filepath = "#{data}/merchants_test.csv")
+  def merchant_repository(filepath = "#{data}/merchants.csv")
     MerchantRepository.new(filepath,self)
   end
 
-  def transaction_repository(filepath = "#{data}/transactions_test.csv")
+  def transaction_repository(filepath = "#{data}/transactions.csv")
     TransactionRepository.new(filepath)
   end
 

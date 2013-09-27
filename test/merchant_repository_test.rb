@@ -5,11 +5,11 @@ require_relative '../lib/merchant_repository'
 class MerchantRepositoryTest < MiniTest::Test
 
   def setup
-    @mr = MerchantRepository.new("./test/fixtures/merchants_test.csv",SalesEngine.new("./test/fixtures"))
+    @mr = MerchantRepository.new("./test/fixtures/merchants.csv",SalesEngine.new("./test/fixtures"))
   end
 
   def test_it_is_initialized_with_a_filepath
-    assert_equal "./test/fixtures/merchants_test.csv", @mr.file_path
+    assert_equal "./test/fixtures/merchants.csv", @mr.file_path
   end
 
   def test_it_populates_all_array_from_csv

@@ -5,11 +5,11 @@ require_relative '../lib/invoice_repository'
 class InvoiceRepositoryTest < MiniTest::Test 
 
   def setup
-    @instance = InvoiceRepository.new("./test/fixtures/invoice_test.csv")
+    @instance = InvoiceRepository.new("./test/fixtures/invoices.csv")
   end
 
   def test_it_is_initialized_with_a_filepath
-    assert_equal "./test/fixtures/invoice_test.csv", @instance.file_path
+    assert_equal "./test/fixtures/invoices.csv", @instance.file_path
   end
 
   def test_it_has_information_in_array_from_csv

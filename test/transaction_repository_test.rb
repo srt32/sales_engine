@@ -8,11 +8,11 @@ require_relative '../lib/transaction_repository'
 class TransactionRepositoryTest < Minitest::Test 
 
   def setup
-    @instance = TransactionRepository.new("./test/fixtures/transaction_test.csv")
+    @instance = TransactionRepository.new("./test/fixtures/transactions.csv")
   end
 
   def test_that_filepath_is_initialized
-    assert_equal "./test/fixtures/transaction_test.csv", @instance.file_path
+    assert_equal "./test/fixtures/transactions.csv", @instance.file_path
   end
 
   def test_that_repo_is_populated_with_data

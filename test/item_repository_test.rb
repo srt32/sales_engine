@@ -5,11 +5,11 @@ require_relative '../lib/item_repository'
 class ItemRepositoryTest < Minitest::Test
 
   def setup
-    @ir = ItemRepository.new("./test/fixtures/items_test.csv")
+    @ir = ItemRepository.new("./test/fixtures/items.csv")
   end
 
   def test_it_is_initialized_with_a_filepath
-    assert_equal "./test/fixtures/items_test.csv", @ir.file_path
+    assert_equal "./test/fixtures/items.csv", @ir.file_path
   end
 
   def test_it_populates_all_array_from_csv

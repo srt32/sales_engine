@@ -41,7 +41,7 @@ class SalesEngineTest < MiniTest::Test
   end
 
   def test_it_returns_collection_of_customers_with_customer_repo_all_command
-    customers = @se.customer_repository("./test/fixtures/customers_test.csv").all
+    customers = @se.customer_repository("./test/fixtures/customers.csv").all
     assert_equal 5, customers.count
   end
 
