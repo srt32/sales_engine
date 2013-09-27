@@ -8,8 +8,8 @@ require_relative 'transaction_repository'
 require_relative 'transaction'
 require_relative 'invoice_item_repository'
 require_relative 'invoice_item'
-#require_relative 'item_repository'
-#require_relative 'item'
+require_relative 'item_repository'
+require_relative 'item'
 
 
 class SalesEngine
