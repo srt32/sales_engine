@@ -52,4 +52,31 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_equal 1, @instance.find_all_by_created_at("2012-03-25 09:54:09 UTC").count
     assert_equal 1, @instance.find_all_by_updated_at("2012-03-25 09:54:09 UTC").count
   end
+
+  def test_it_returns_transaction_collection_given_an_invoice
+    skip
+    first_invoice = @instance.find_by_id("1")                       
+    first_invoice_transactions = first_invoice.transactions
+    assert_equal 2, first_invoice_transactions.count
+    assert_equal "4654405418249632", first_invoice_transactions[0].credit_card_number
+  end
+
+  def test_it_returns_invoice_items_collection_given_an_invoice
+    skip
+    7
+  end
+
+  def test_it_returns_items_collection_through_InvoiceItems_given_an_invoice
+    skip
+    7
+  end
+
+  def test_it_returns_customer_instance_given_an_invoice
+    skip
+  end
+
+  def test_it_returns_merchant_instance_given_an_invoice
+    skip
+  end
+
 end

@@ -70,4 +70,5 @@ class InvoiceItemRepositoryTest < Minitest::Test
     ii = @iir.find_all_by_item_id("99")
     assert_equal [], ii
   end
+
 end
