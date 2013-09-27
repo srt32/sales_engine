@@ -2,10 +2,12 @@ require 'csv'
 
 class MerchantRepository
 
-  attr_reader :file_path
+  attr_reader :file_path,
+              :engine
 
-  def initialize(file_path = "")
+  def initialize(file_path = "",engine)
     @file_path = file_path
+    @engine = engine
   end
 
   def all
@@ -17,7 +19,8 @@ class MerchantRepository
     all = csv_data.collect{|row| Merchant.new(:id => row["id"],
                                               :name => row["name"],
                                               :created_at => row["created_at"],
-                                              :updated_at => row["updated_at"])}
+                                              :updated_at => row["updated_at"],
+                                              :merchant_repo_ref => self)}
   end
 
   def open_file
@@ -38,6 +41,10 @@ class MerchantRepository
     define_method("find_all_by_#{attribute}") do |criteria| 
       all.find_all{|c| c.send(attribute) == criteria}
     end
+  end
+
+  def items
+
   end
 
 end

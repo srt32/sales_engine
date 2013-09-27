@@ -5,7 +5,7 @@ require_relative '../lib/merchant_repository'
 class MerchantRepositoryTest < MiniTest::Test
 
   def setup
-    @mr = MerchantRepository.new("./test/fixtures/merchants_test.csv")
+    @mr = MerchantRepository.new("./test/fixtures/merchants_test.csv",SalesEngine.new("./test/fixtures"))
   end
 
   def test_it_is_initialized_with_a_filepath
@@ -23,6 +23,7 @@ class MerchantRepositoryTest < MiniTest::Test
     assert_equal "Schroeder-Jerde", first_customer.name
     assert_equal "2012-03-27 14:53:59 UTC", first_customer.created_at
     assert_equal "2012-03-27 14:53:59 UTC", first_customer.updated_at
+    assert_kind_of MerchantRepository, first_customer.merchant_repo_ref
   end
 
   def test_it_can_select_a_random_customer_from_all
@@ -53,8 +54,7 @@ class MerchantRepositoryTest < MiniTest::Test
     assert_equal [], merchants
   end
 
-  def test_it_return_items_collection_given_a_merchant
-    skip
+  def test_it_returns_items_collection_given_a_merchant
     first_merchant = @mr.find_by_id("1")                       
     first_merchant_items = first_merchant.items
     assert_equal 4, first_merchant_items.count
@@ -62,7 +62,6 @@ class MerchantRepositoryTest < MiniTest::Test
   end
 
   def test_it_returns_invoices_collection_given_a_merchant
-    skip
     first_merchant = @mr.find_by_id("1")
     first_merchant_invoices = first_merchant.invoices
     assert_equal 2, first_merchant_invoices.count

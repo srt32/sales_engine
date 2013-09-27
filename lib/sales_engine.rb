@@ -9,40 +9,41 @@ require_relative 'transaction'
 require_relative 'invoice_item_repository'
 require_relative 'invoice_item'
 require_relative 'item_repository'
-require_relative 'item'
 
 
 class SalesEngine
 
+  attr_reader :data
+
   def initialize(data = './data')
- 
+   @data = data 
   end
 
   def startup
     
   end
 
-  def customer_repository(filepath= "./data/customers.csv")
+  def customer_repository(filepath= "#{data}/customers_test.csv")
     CustomerRepository.new(filepath)
   end
 
-  def invoice_item_repository(filepath= "./data/invoice_items.csv")
+  def invoice_item_repository(filepath= "#{data}/invoice_item_test.csv")
     InvoiceItemRepository.new(filepath)
   end
 
-  def invoice_repository(filepath= "./data/invoices.csv")
+  def invoice_repository(filepath= "#{data}/invoice_test.csv")
     InvoiceRepository.new(filepath)
   end
 
-  def item_repository(filepath = "./data/items.csv")
+  def item_repository(filepath = "#{data}/items_test.csv")
     ItemRepository.new(filepath)
   end
 
-  def merchant_repository(filepath = "./data/merchants.csv")
+  def merchant_repository(filepath = "#{data}/merchants_test.csv")
     MerchantRepository.new(filepath)
   end
 
-  def transaction_repository(filepath = "./data/transactions.csv")
+  def transaction_repository(filepath = "#{data}/transactions_test.csv")
     TransactionRepository.new(filepath)
   end
 
