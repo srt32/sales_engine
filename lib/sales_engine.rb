@@ -28,7 +28,7 @@ class SalesEngine
   end
 
   def invoice_item_repository(filepath= "#{data}/invoice_items.csv")
-    InvoiceItemRepository.new(filepath)
+    InvoiceItemRepository.new(filepath,self)
   end
 
   def invoice_repository(filepath= "#{data}/invoices.csv")

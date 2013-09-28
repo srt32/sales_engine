@@ -5,7 +5,7 @@ require_relative '../lib/invoice_item_repository'
 class InvoiceItemRepositoryTest < Minitest::Test
   
   def setup
-    @iir = InvoiceItemRepository.new("./test/fixtures/invoice_items.csv")
+    @iir = InvoiceItemRepository.new("./test/fixtures/invoice_items.csv",SalesEngine.new("./test/fixtures"))
   end
 
   def test_it_is_initialized_with_a_filepath

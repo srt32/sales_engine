@@ -6,7 +6,8 @@ class InvoiceItem
               :quantity,
               :unit_price,
               :created_at,
-              :updated_at
+              :updated_at,
+              :invoice_item_repo_ref
 
   def initialize(input = {})
     @id = input[:id]
@@ -16,6 +17,7 @@ class InvoiceItem
     @unit_price = input[:unit_price]
     @created_at = input[:created_at]
     @updated_at = input[:updated_at]
+    @invoice_item_repo_ref = input[:invoice_item_repo_ref]
   end
 
 end

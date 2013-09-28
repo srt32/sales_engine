@@ -1,9 +1,11 @@
 class InvoiceItemRepository
   
-  attr_reader :file_path
+  attr_reader :file_path,
+              :engine
 
-  def initialize(file_path = "")
+  def initialize(file_path = "", engine)
     @file_path = file_path
+    @engine = engine
   end
 
   def open_file
@@ -22,7 +24,8 @@ class InvoiceItemRepository
                                               :quantity => row["quantity"],
                                               :unit_price => row["unit_price"],
                                               :created_at => row["created_at"],
-                                              :updated_at => row["updated_at"])}
+                                              :updated_at => row["updated_at"],
+                                              :invoice_item_repo_ref => self)}
   end
 
   def random
@@ -40,6 +43,5 @@ class InvoiceItemRepository
       all.find_all{|c| c.send(attribute) == criteria.to_s}
     end
   end
-
 
 end
