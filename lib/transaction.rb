@@ -16,4 +16,10 @@ class Transaction
     @updated_at = input[:updated_at]
     @transaction_repo_ref = input[:transaction_repo_ref]
   end
+
+  def invoice
+    invoice_repo = transaction_repo_ref.engine.invoice_repository
+    invoice_repo.find_by_id(self.invoice_id)
+  end
+
 end

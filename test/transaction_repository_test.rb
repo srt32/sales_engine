@@ -60,4 +60,11 @@ class TransactionRepositoryTest < Minitest::Test
     refute_equal [nil,nil,nil,nil,nil], random_transactions
     refute_equal @instance.all, random_transactions
   end
+
+  def test_it_returns_invoice_given_a_transaction
+    transaction = @instance.find_by_id(1)
+    transaction_invoice = transaction.invoice
+    assert_equal "26", transaction_invoice.merchant_id
+  end
+
 end
