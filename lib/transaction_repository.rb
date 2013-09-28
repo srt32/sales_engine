@@ -2,10 +2,12 @@ require_relative './transaction'
 
 class TransactionRepository
 
-  attr_reader :file_path
+  attr_reader :file_path,
+              :engine
 
-  def initialize(file_path = "")
+  def initialize(file_path = "",engine)
     @file_path = file_path
+    @engine = engine
   end
 
   def all 
@@ -19,7 +21,8 @@ class TransactionRepository
                                             :result => row["result"],
                                             :name => row["name"],
                                             :created_at => row["created_at"],
-                                            :updated_at => row["updated_at"])}
+                                            :updated_at => row["updated_at"],
+                                            :transaction_repo_ref => self)}
   end
 
   %w(id invoice_id credit_card_number result created_at updated_at).each do |attribute| 

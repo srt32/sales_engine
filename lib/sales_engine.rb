@@ -44,7 +44,7 @@ class SalesEngine
   end
 
   def transaction_repository(filepath = "#{data}/transactions.csv")
-    TransactionRepository.new(filepath)
+    TransactionRepository.new(filepath,self)
   end
 
 end

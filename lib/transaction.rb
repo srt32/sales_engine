@@ -4,7 +4,8 @@ class Transaction
               :credit_card_number, 
               :result,
               :created_at, 
-              :updated_at
+              :updated_at,
+              :transaction_repo_ref
 
   def initialize(input={})
     @id = input[:id]
@@ -13,5 +14,6 @@ class Transaction
     @result = input[:result]
     @created_at = input[:created_at]
     @updated_at = input[:updated_at]
+    @transaction_repo_ref = input[:transaction_repo_ref]
   end
 end
