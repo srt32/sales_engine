@@ -76,11 +76,13 @@ class InvoiceItemRepositoryTest < Minitest::Test
     ii_invoice = ii.invoice
     assert_kind_of Invoice, ii_invoice
     assert_equal "26", ii_invoice.merchant_id
-
   end
 
   def test_it_returns_associated_item_given_ii
-    skip
+    ii = @iir.find_by_id(5)
+    ii_item = ii.item
+    assert_kind_of Item, ii_item
+    assert_equal "Item Nemo Facere", ii_item.name
   end
 
 end
