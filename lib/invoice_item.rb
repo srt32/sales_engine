@@ -20,4 +20,9 @@ class InvoiceItem
     @invoice_item_repo_ref = input[:invoice_item_repo_ref]
   end
 
+  def invoice
+    ir = invoice_item_repo_ref.engine.invoice_repository
+    ir.find_by_id(self.invoice_id)
+  end
+
 end
