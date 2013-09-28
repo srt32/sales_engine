@@ -43,4 +43,9 @@ class Invoice
     cr.find_by_id(self.customer_id)
   end
 
+  def merchant
+    mr = invoice_repo_ref.engine.merchant_repository
+    mr.find_by_id(self.merchant_id)
+  end
+
 end

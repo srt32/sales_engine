@@ -86,7 +86,10 @@ class InvoiceRepositoryTest < MiniTest::Test
   end
 
   def test_it_returns_merchant_instance_given_an_invoice
-    skip
+    first_invoice = @instance.find_by_id(2)
+    first_invoice_merchant = first_invoice.merchant
+    assert_kind_of Merchant, first_invoice_merchant
+    assert_equal"Schroeder-Jerde", first_invoice_merchant.name  
   end
 
 end
