@@ -22,4 +22,9 @@ class Invoice
    tr.find_all_by_invoice_id(self.id)
   end
 
+  def invoice_items
+    iir = invoice_repo_ref.engine.invoice_item_repository
+    iir.find_all_by_invoice_id(self.id)
+  end
+
 end

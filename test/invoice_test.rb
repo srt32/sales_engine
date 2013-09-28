@@ -23,6 +23,7 @@ class InvoiceTest < Minitest::Test
                            :created_at => "2012-03-27 14:54:09 UTC",
                            :updated_at => "2012-03-27 14:54:10 UTC",
                            :invoice_repo_ref => InvoiceRepository.new("./test/fixtures/invoices.csv",SalesEngine.new))
+    assert_equal "1", instance.id
     assert_equal "1", instance.customer_id
     assert_equal "44", instance.merchant_id
     assert_equal "shipped", instance.status
