@@ -44,7 +44,11 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_equal "2012-03-25 09:54:09 UTC", @instance.find_by_updated_at("2012-03-25 09:54:09 UTC").updated_at
   end
 
-    def test_it_returns_correct_value_for_all_find_method
+  def test_it_returns_correct_value_for_find_by_id_given_integer_input
+    assert_equal "1", @instance.find_by_id(1).id
+  end
+
+  def test_it_returns_correct_value_for_all_find_method
     assert_equal 1, @instance.find_all_by_id("1").count
     assert_equal 8, @instance.find_all_by_customer_id("1").count
     assert_equal 1, @instance.find_all_by_merchant_id("26").count
@@ -68,12 +72,17 @@ class InvoiceRepositoryTest < MiniTest::Test
   end
 
   def test_it_returns_items_collection_through_InvoiceItems_given_an_invoice
-    skip
-    7
+    first_invoice = @instance.find_by_id(1)
+    first_invoice_items = first_invoice.items
+    assert_equal 2,first_invoice_items.count
+    assert_equal "Item Ea Voluptatum", first_invoice_items[0].name
   end
 
   def test_it_returns_customer_instance_given_an_invoice
-    skip
+    first_invoice = @instance.find_by_id(1)
+    first_invoice_customer = first_invoice.customer
+    assert_kind_of Customer, first_invoice_customer
+    assert_equal "Joey", first_invoice_customer.first_name
   end
 
   def test_it_returns_merchant_instance_given_an_invoice

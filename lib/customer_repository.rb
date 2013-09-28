@@ -18,13 +18,13 @@ class CustomerRepository
 
   %w(id first_name last_name created_at updated_at).each do |attribute|
     define_method("find_by_#{attribute}") do |criteria| 
-      all.find{|c| c.send(attribute) == criteria}
+      all.find{|c| c.send(attribute) == criteria.to_s}
     end
   end
  
   %w(id first_name last_name created_at updated_at).each do |attribute|
     define_method("find_all_by_#{attribute}") do |criteria| 
-      all.find_all{|c| c.send(attribute) == criteria}
+      all.find_all{|c| c.send(attribute) == criteria.to_s}
     end
   end
 
