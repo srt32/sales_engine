@@ -5,7 +5,7 @@ require_relative '../lib/invoice_repository'
 class InvoiceRepositoryTest < MiniTest::Test 
 
   def setup
-    @instance = InvoiceRepository.new("./test/fixtures/invoices.csv")
+    @instance = InvoiceRepository.new("./test/fixtures/invoices.csv",SalesEngine.new("./test/fixtures"))
   end
 
   def test_it_is_initialized_with_a_filepath
@@ -54,7 +54,6 @@ class InvoiceRepositoryTest < MiniTest::Test
   end
 
   def test_it_returns_transaction_collection_given_an_invoice
-    skip
     first_invoice = @instance.find_by_id("1")                       
     first_invoice_transactions = first_invoice.transactions
     assert_equal 2, first_invoice_transactions.count

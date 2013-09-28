@@ -16,12 +16,19 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_can_be_give_a_first_name_last_name_id_created_at_and_updated_at
-    instance = Invoice.new(:id => "1", :customer_id => "1", :merchant_id => "44", :status => "shipped", :created_at => "2012-03-27 14:54:09 UTC", :updated_at => "2012-03-27 14:54:10 UTC")
+    instance = Invoice.new(:id => "1",
+                           :customer_id => "1",
+                           :merchant_id => "44",
+                           :status => "shipped",
+                           :created_at => "2012-03-27 14:54:09 UTC",
+                           :updated_at => "2012-03-27 14:54:10 UTC",
+                           :invoice_repo_ref => InvoiceRepository.new("./test/fixtures/invoices.csv",SalesEngine.new))
     assert_equal "1", instance.customer_id
     assert_equal "44", instance.merchant_id
     assert_equal "shipped", instance.status
     assert_equal "2012-03-27 14:54:09 UTC", instance.created_at
     assert_equal "2012-03-27 14:54:10 UTC", instance.updated_at
+    assert_kind_of InvoiceRepository, instance.invoice_repo_ref
   end
 end
 
