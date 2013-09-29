@@ -16,4 +16,8 @@ class Customer
     @customer_repo_ref = input[:customer_repo_ref]
   end
 
+  def invoices
+    customer_repo_ref.engine.invoice_repository.find_all_by_customer_id(self.id)
+  end
+
 end

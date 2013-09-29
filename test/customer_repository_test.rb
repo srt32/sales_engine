@@ -101,4 +101,9 @@ class CustomerRepositoryTest < Minitest::Test
     refute customers.nil?
   end
 
+  def test_it_invoice_collections_given_a_customer
+    customer = @cr.find_by_id(1)
+    customer_invoices = customer.invoices
+    assert_equal 8, customer_invoices.count
+  end
 end
