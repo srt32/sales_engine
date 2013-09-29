@@ -5,7 +5,7 @@ require_relative '../lib/item_repository'
 class ItemRepositoryTest < Minitest::Test
 
   def setup
-    @ir = ItemRepository.new("./test/fixtures/items.csv")
+    @ir = ItemRepository.new("./test/fixtures/items.csv",SalesEngine.new("./test/fixtures"))
   end
 
   def test_it_is_initialized_with_a_filepath

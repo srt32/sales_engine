@@ -36,7 +36,7 @@ class SalesEngine
   end
 
   def item_repository(filepath = "#{data}/items.csv")
-    ItemRepository.new(filepath)
+    ItemRepository.new(filepath,self)
   end
 
   def merchant_repository(filepath = "#{data}/merchants.csv")

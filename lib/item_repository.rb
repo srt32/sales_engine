@@ -4,9 +4,11 @@ require_relative './item'
 class ItemRepository
 
   attr_reader :file_path
+              :engine
 
-  def initialize(file_path = "")
+  def initialize(file_path = "",engine)
     @file_path = file_path
+    @engine = engine
   end
 
   def all

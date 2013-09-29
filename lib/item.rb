@@ -7,7 +7,8 @@ class Item
               :unit_price,
               :merchant_id,
               :created_at,
-              :updated_at
+              :updated_at,
+              :item_repo_ref
 
   def initialize(input)
     @id = input[:id]
@@ -17,5 +18,6 @@ class Item
     @merchant_id = input[:merchant_id]
     @created_at = input[:created_at]
     @updated_at = input[:updated_at]
+    @item_repo_ref = input[:item_repo_ref]
   end
 end

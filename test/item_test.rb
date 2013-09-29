@@ -11,7 +11,8 @@ class ItemTest < Minitest::Test
                     :unit_price =>"1000",
                     :merchant_id =>"1",
                     :created_at =>"2012-03-27 14:53:59 UTC",
-                    :updated_at =>"2012-03-27 14:53:59 UTC")
+                    :updated_at =>"2012-03-27 14:53:59 UTC",
+                    :item_repo_ref => ItemRepository.new("./test/fixtures/items.csv",SalesEngine.new))
     assert_equal "1", item.id
     assert_equal "Spam", item.name
     assert_equal "The best meat on earth", item.description
@@ -19,6 +20,7 @@ class ItemTest < Minitest::Test
     assert_equal "1", item.merchant_id
     assert_equal "2012-03-27 14:53:59 UTC", item.created_at
     assert_equal "2012-03-27 14:53:59 UTC", item.updated_at
+    assert_kind_of ItemRepository, item.item_repo_ref
   end
 
 end
