@@ -15,11 +15,15 @@ class Item
     @id = input[:id].to_i
     @name = input[:name]
     @description = input[:description]
-    @unit_price = input[:unit_price]
+    @unit_price = convert_cents_string_into_big_decimal(input[:unit_price])
     @merchant_id = input[:merchant_id].to_i
     @created_at = input[:created_at]
     @updated_at = input[:updated_at]
     @item_repo_ref = input[:item_repo_ref]
+  end
+
+  def convert_cents_string_into_big_decimal(input_string)
+    BigDecimal.new((input_string.to_i/100.0).to_s)
   end
 
   def invoice_items
