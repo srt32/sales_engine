@@ -1,4 +1,5 @@
 class Transaction
+  
   attr_reader :id, 
               :invoice_id, 
               :credit_card_number, 
@@ -8,7 +9,7 @@ class Transaction
               :transaction_repo_ref
 
   def initialize(input={})
-    @id = input[:id]
+    @id = input[:id].to_i
     @invoice_id = input[:invoice_id]
     @credit_card_number = input[:credit_card_number]
     @result = input[:result]
