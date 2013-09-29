@@ -19,7 +19,7 @@ class MerchantRepositoryTest < MiniTest::Test
   def test_it_populates_all_the_customer_data 
     customers = @mr.all
     first_customer = customers[0]
-    assert_equal "1", first_customer.id
+    assert_equal 1, first_customer.id
     assert_equal "Schroeder-Jerde", first_customer.name
     assert_equal "2012-03-27 14:53:59 UTC", first_customer.created_at
     assert_equal "2012-03-27 14:53:59 UTC", first_customer.updated_at
@@ -36,7 +36,7 @@ class MerchantRepositoryTest < MiniTest::Test
   end
 
   def test_it_returns_correct_single_merchant_by_attributes
-    assert_equal "1",  @mr.find_by_id("1").id
+    assert_equal 1,  @mr.find_by_id("1").id
     assert_equal "Schroeder-Jerde", @mr.find_by_name("Schroeder-Jerde").name
     assert_equal "2012-03-27 14:53:59 UTC", @mr.find_by_created_at("2012-03-27 14:53:59 UTC").created_at
     assert_equal "2012-03-27 14:53:59 UTC", @mr.find_by_updated_at("2012-03-27 14:53:59 UTC").updated_at

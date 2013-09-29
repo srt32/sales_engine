@@ -19,7 +19,7 @@ class MerchantTest < MiniTest::Test
                             :updated_at => "2012-03-27 14:54:10 UTC",
                             :merchant_repo_ref => MerchantRepository.new("./test/fixtures/merchants_test.csv",SalesEngine.new))
     assert_equal "Florist Fryers", merchant.name
-    assert_equal "1", merchant.id
+    assert_equal 1, merchant.id
     assert_equal "2012-03-27 14:54:09 UTC", merchant.created_at
     assert_equal "2012-03-27 14:54:10 UTC", merchant.updated_at
     assert_kind_of MerchantRepository, merchant.merchant_repo_ref
