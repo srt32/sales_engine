@@ -28,9 +28,9 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def test_it_populates_all_the_invoice_items_data
     invoice_items = @iir.all
     first_invoice_item = invoice_items[0]
-    assert_equal "1", first_invoice_item.id 
-    assert_equal "539", first_invoice_item.item_id
-    assert_equal "1", first_invoice_item.invoice_id
+    assert_equal 1, first_invoice_item.id 
+    assert_equal 539, first_invoice_item.item_id
+    assert_equal 1, first_invoice_item.invoice_id
     assert_equal "5", first_invoice_item.quantity
     assert_equal "13635", first_invoice_item.unit_price
     assert_equal "2012-03-27 14:54:09 UTC", first_invoice_item.created_at 
@@ -47,9 +47,9 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_correct_single_invoice_item_by_attributes
-    assert_equal "1", @iir.find_by_id("1").id 
-    assert_equal "539",@iir.find_by_item_id("539").item_id
-    assert_equal "1", @iir.find_by_invoice_id("1").invoice_id
+    assert_equal 1, @iir.find_by_id("1").id 
+    assert_equal 539,@iir.find_by_item_id("539").item_id
+    assert_equal 1, @iir.find_by_invoice_id("1").invoice_id
     assert_equal "5", @iir.find_by_quantity("5").quantity
     assert_equal "13635", @iir.find_by_unit_price("13635").unit_price
     assert_equal "2012-03-27 14:54:09 UTC", @iir.find_by_created_at("2012-03-27 14:54:09 UTC").created_at 
