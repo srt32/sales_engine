@@ -29,12 +29,11 @@ class CustomerRepositoryTest < Minitest::Test
   def test_it_populates_all_the_customer_data
     customers = @cr.all
     first_customer = customers[0]
-    assert_equal "1", first_customer.id
+    assert_equal 1, first_customer.id
     assert_equal "Joey", first_customer.first_name
     assert_equal "Ondricka", first_customer.last_name
     assert_equal "2012-03-27 14:54:09 UTC", first_customer.created_at
     assert_equal "2012-03-27 14:54:09 UTC", first_customer.updated_at
-    assert_equal "1", first_customer.id
   end
 
   def test_it_can_select_a_random_customer_from_all
@@ -47,7 +46,7 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_it_return_correct_customer_by_id
     customer = @cr.find_by_id("1")
-    assert_equal "1", customer.id
+    assert_equal 1, customer.id
   end
 
   def test_it_return_correct_customer_by_first_name

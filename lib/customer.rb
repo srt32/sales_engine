@@ -10,7 +10,7 @@ class Customer
   def initialize(input = {})
     @first_name = input[:first_name]
     @last_name = input[:last_name]
-    @id = input[:id]
+    @id = input[:id].to_i
     @created_at = input[:created_at]
     @updated_at = input[:updated_at]
     @customer_repo_ref = input[:customer_repo_ref]
