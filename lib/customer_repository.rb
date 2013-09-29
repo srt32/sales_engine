@@ -2,10 +2,12 @@ require 'csv'
 
 class CustomerRepository
 
-  attr_reader :file_path
+  attr_reader :file_path,
+              :engine
 
-  def initialize(file_path = "")
+  def initialize(file_path = "",engine)
     @file_path = file_path
+    @engine = engine
   end
 
   def all
@@ -34,7 +36,8 @@ class CustomerRepository
       :first_name => row["first_name"],
       :last_name => row["last_name"],
       :created_at => row["created_at"],
-      :updated_at => row["updated_at"])}
+      :updated_at => row["updated_at"],
+      :customer_repo_ref => self)}
   end
 
   def open_file

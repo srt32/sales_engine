@@ -24,7 +24,7 @@ class SalesEngine
   end
 
   def customer_repository(filepath= "#{data}/customers.csv")
-    CustomerRepository.new(filepath)
+    CustomerRepository.new(filepath,self)
   end
 
   def invoice_item_repository(filepath= "#{data}/invoice_items.csv")
