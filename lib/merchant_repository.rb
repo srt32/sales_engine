@@ -43,8 +43,4 @@ class MerchantRepository
     end
   end
 
-  def items
-
-  end
-
 end

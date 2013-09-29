@@ -74,7 +74,7 @@ class InvoiceRepositoryTest < MiniTest::Test
   def test_it_returns_items_collection_through_InvoiceItems_given_an_invoice
     first_invoice = @instance.find_by_id(1)
     first_invoice_items = first_invoice.items
-    assert_equal 2,first_invoice_items.count
+    assert_equal 4,first_invoice_items.count
     assert_equal "Item Ea Voluptatum", first_invoice_items[0].name
   end
 

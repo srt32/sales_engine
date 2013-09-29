@@ -3,7 +3,7 @@ require_relative './item'
 
 class ItemRepository
 
-  attr_reader :file_path
+  attr_reader :file_path,
               :engine
 
   def initialize(file_path = "",engine)
@@ -22,7 +22,8 @@ class ItemRepository
                                      :unit_price => row["unit_price"],
                                      :merchant_id => row["merchant_id"],
                                      :created_at => row["created_at"],
-                                     :updated_at => row["updated_at"]
+                                     :updated_at => row["updated_at"],
+                                     :item_repo_ref => self
     )}
   end
 
