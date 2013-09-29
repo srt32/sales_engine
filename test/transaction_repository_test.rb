@@ -22,7 +22,7 @@ class TransactionRepositoryTest < Minitest::Test
   def test_that_all_attributes_make_it_through_the_parsing
     first_transaction = @instance.all[0]
     assert_equal 1, first_transaction.id
-    assert_equal "1", first_transaction.invoice_id
+    assert_equal 1, first_transaction.invoice_id
     assert_equal "4654405418249632", first_transaction.credit_card_number
     assert_equal "2012-03-27 14:54:09 UTC", first_transaction.created_at
     assert_equal "2012-03-27 14:54:09 UTC", first_transaction.updated_at
@@ -31,7 +31,7 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_it_returns_correct_single_transaction_by_attributes
     assert_equal 1, @instance.find_by_id("1").id
-    assert_equal "1", @instance.find_by_invoice_id("1").invoice_id
+    assert_equal 1, @instance.find_by_invoice_id("1").invoice_id
     assert_equal "4654405418249632", @instance.find_by_credit_card_number("4654405418249632").credit_card_number
     assert_equal "2012-03-27 14:54:09 UTC", @instance.find_by_created_at("2012-03-27 14:54:09 UTC").created_at
     assert_equal "2012-03-27 14:54:09 UTC", @instance.find_by_updated_at("2012-03-27 14:54:09 UTC").updated_at

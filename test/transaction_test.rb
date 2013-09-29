@@ -20,7 +20,7 @@ class TransactionTest < Minitest::Test
       :updated_at => "2012-03-27 14:54:10 UTC",
       :transaction_repo_ref => TransactionRepository.new("./test/fixtures/transactions.csv",SalesEngine.new))
         assert_equal 4, instance.id
-        assert_equal "5", instance.invoice_id
+        assert_equal 5, instance.invoice_id
         assert_equal "81930383492010", instance.credit_card_number
         assert_equal "failure", instance.result
         assert_equal "2012-03-27 14:54:09 UTC", instance.created_at

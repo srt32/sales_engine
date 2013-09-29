@@ -10,7 +10,7 @@ class Transaction
 
   def initialize(input={})
     @id = input[:id].to_i
-    @invoice_id = input[:invoice_id]
+    @invoice_id = input[:invoice_id].to_i
     @credit_card_number = input[:credit_card_number]
     @result = input[:result]
     @created_at = input[:created_at]
