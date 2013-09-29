@@ -45,8 +45,8 @@ class MerchantRepository
 
   def most_revenue(amount)
    # go through invoices and sum across associated invoice_items rev
-    # on invoice create:
-      # total_revenue method that sums across i_i revenues
+    #### on invoice_item, get some for each ii THEN
+    #### on invoice create, total_revenue method that sums across i_i revenues
 
     # order the invoice revenues
       # Could move this ordering into invoice class
