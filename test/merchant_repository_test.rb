@@ -67,4 +67,11 @@ class MerchantRepositoryTest < MiniTest::Test
     assert_equal 3, first_merchant_invoices.count
   end
 
+  def test_it_returns_top_merchant_when_sent_most_revenue
+    skip
+    top_revenue_merchant = @mr.most_revenue(1)
+    assert_kind_of Merchant, top_revenue_merchant
+    #most_revenue(x) returns the top x merchant instances ranked by total revenue
+  end
+
 end

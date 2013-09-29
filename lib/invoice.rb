@@ -48,4 +48,8 @@ class Invoice
     mr.find_by_id(self.merchant_id)
   end
 
+  def successful_charge?
+    self.transactions.any?{|t| t.successful?}
+  end
+
 end

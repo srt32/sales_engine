@@ -23,4 +23,12 @@ class Transaction
     invoice_repo.find_by_id(self.invoice_id)
   end
 
+  def successful? 
+   if self.result == "success"
+      true
+    else
+      false
+    end
+  end
+
 end

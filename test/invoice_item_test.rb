@@ -27,4 +27,9 @@ class InvoiceItemTest < MiniTest::Test
     assert_kind_of InvoiceItemRepository, item.invoice_item_repo_ref
   end
 
+  def test_it_calculates_revenue_for_item_with_a_successful_invoice
+    skip
+    
+  end
+
 end

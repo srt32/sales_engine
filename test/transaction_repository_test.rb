@@ -26,7 +26,7 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal "4654405418249632", first_transaction.credit_card_number
     assert_equal "2012-03-27 14:54:09 UTC", first_transaction.created_at
     assert_equal "2012-03-27 14:54:09 UTC", first_transaction.updated_at
-    assert_equal "success", first_transaction.result
+    assert_equal "failure", first_transaction.result
   end 
 
   def test_it_returns_correct_single_transaction_by_attributes
@@ -44,7 +44,7 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 2, @instance.find_all_by_credit_card_number("4654405418249632").count
     assert_equal 8, @instance.find_all_by_created_at("2012-03-27 14:54:10 UTC").count
     assert_equal 8, @instance.find_all_by_updated_at("2012-03-27 14:54:10 UTC").count
-    assert_equal 10, @instance.find_all_by_result("success").count
+    assert_equal 8, @instance.find_all_by_result("success").count
   end
 
   def test_it_returns_empty_array_for_all_name_when_no_results

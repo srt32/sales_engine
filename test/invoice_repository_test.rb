@@ -13,7 +13,7 @@ class InvoiceRepositoryTest < MiniTest::Test
   end
 
   def test_it_has_information_in_array_from_csv
-    assert_equal 9, @instance.all.count
+    assert_equal 10, @instance.all.count
   end
 
   def test_it_gathers_all_invoice_data
@@ -52,7 +52,7 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_equal 1, @instance.find_all_by_id("1").count
     assert_equal 8, @instance.find_all_by_customer_id("1").count
     assert_equal 1, @instance.find_all_by_merchant_id("26").count
-    assert_equal 9, @instance.find_all_by_status("shipped").count
+    assert_equal 10, @instance.find_all_by_status("shipped").count
     assert_equal 1, @instance.find_all_by_created_at("2012-03-25 09:54:09 UTC").count
     assert_equal 1, @instance.find_all_by_updated_at("2012-03-25 09:54:09 UTC").count
   end
