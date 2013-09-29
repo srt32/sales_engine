@@ -19,11 +19,11 @@ class ItemRepositoryTest < Minitest::Test
   def test_it_populates_all_the_merchant_data
     items = @ir.all
     first_item = items[0]
-    assert_equal "1", first_item.id
+    assert_equal 1, first_item.id
     assert_equal "Item Qui Esse", first_item.name
     assert_equal "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.", first_item.description
     assert_equal "75107", first_item.unit_price
-    assert_equal "1", first_item.merchant_id
+    assert_equal 1, first_item.merchant_id
     assert_equal "2012-03-27 14:53:59 UTC", first_item.created_at
     assert_equal "2012-03-27 14:53:59 UTC", first_item.updated_at
   end
@@ -38,11 +38,11 @@ class ItemRepositoryTest < Minitest::Test
   end
 
    def test_it_returns_correct_single_item_by_attributes
-    assert_equal "1", @ir.find_by_id("1").id
+    assert_equal 1, @ir.find_by_id("1").id
     assert_equal "Item Qui Esse", @ir.find_by_name("Item Qui Esse").name
     assert_equal "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.",  @ir.find_by_description("Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.").description
     assert_equal "75107", @ir.find_by_unit_price("75107").unit_price
-    assert_equal "1", @ir.find_by_merchant_id("1").merchant_id
+    assert_equal 1, @ir.find_by_merchant_id("1").merchant_id
     assert_equal "2012-03-27 14:53:59 UTC", @ir.find_by_created_at("2012-03-27 14:53:59 UTC").created_at
     assert_equal "2012-03-27 14:53:59 UTC", @ir.find_by_updated_at("2012-03-27 14:53:59 UTC").updated_at
    end
