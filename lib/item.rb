@@ -26,4 +26,8 @@ class Item
     item_repo_ref.engine.invoice_item_repository.find_all_by_item_id(self.id) 
   end
 
+  def merchant
+    item_repo_ref.engine.merchant_repository.find_by_id(self.merchant_id)
+  end
+
 end

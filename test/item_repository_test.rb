@@ -69,7 +69,9 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_an_instance_of_merchant_given_an_item
-    skip
+    item = @ir.find_by_id(1)
+    item_merchant = item.merchant
+    assert_equal "Schroeder-Jerde",item_merchant.name
   end
 
 end
