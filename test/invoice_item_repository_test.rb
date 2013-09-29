@@ -75,7 +75,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
     ii = @iir.find_by_id(5)
     ii_invoice = ii.invoice
     assert_kind_of Invoice, ii_invoice
-    assert_equal "26", ii_invoice.merchant_id
+    assert_equal 26, ii_invoice.merchant_id
   end
 
   def test_it_returns_associated_item_given_ii

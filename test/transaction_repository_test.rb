@@ -64,7 +64,7 @@ class TransactionRepositoryTest < Minitest::Test
   def test_it_returns_invoice_given_a_transaction
     transaction = @instance.find_by_id(1)
     transaction_invoice = transaction.invoice
-    assert_equal "26", transaction_invoice.merchant_id
+    assert_equal 26, transaction_invoice.merchant_id
   end
 
 end
