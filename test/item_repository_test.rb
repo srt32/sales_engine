@@ -75,11 +75,18 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_it_returns_items_collection_of_quantity_sold
-    # most_items(x) returns the top x item instances ranked by total number sold
     most_sold = @ir.most_items(2)
     assert_kind_of Array, most_sold
     assert_equal 2, most_sold.length
     assert_equal 1, most_sold.first.id
   end
+
+  def test_it_returns_sorted_array_of_items_by_total_revenue
+    most_revenues = @ir.most_revenue(2)
+    assert_kind_of Array, most_revenues
+    assert_equal 2, most_revenues.length
+    assert_equal 529, most_revenues.first.id
+  end
+  #most_revenue(x) returns the top x item instances ranked by total revenue
 
 end

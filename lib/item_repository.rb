@@ -52,4 +52,9 @@ class ItemRepository
     sorted_items = totals_with_ids.collect {|item| self.find_by_id(item[0])}
   end
 
+  def most_revenue(amount)
+    totals_with_ids = engine.invoice_item_repository.total_revenue_sold[0..amount-1]
+    sorted_items = totals_with_ids.collect {|item| self.find_by_id(item[0])}
+  end
+
 end

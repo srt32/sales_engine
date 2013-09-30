@@ -51,4 +51,11 @@ class InvoiceItemRepository
     sorted_totals = totals.sort_by{|_key,value| value}.reverse 
   end
 
+  def total_revenue_sold
+    totals = self.all.each_with_object(Hash.new(0)) do |ii, ii_revenue|
+      ii_revenue[ii.item_id] += ii.revenue
+    end
+    sorted_totals = totals.sort_by{|_key,value| value}.reverse
+  end
+
 end
