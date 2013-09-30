@@ -68,10 +68,11 @@ class MerchantRepositoryTest < MiniTest::Test
   end
 
   def test_it_returns_top_merchant_when_sent_most_revenue
-    top_revenue_merchants = @mr.most_revenue(1)
-    assert_kind_of Merchant, top_revenue_merchants[0]
+    #mr = MerchantRepository.new("./data/merchants.csv",SalesEngine.new("./data"))  
+    top_revenue_merchants = @mr.most_revenue(2)
+    assert_kind_of Merchant, top_revenue_merchants.first
     assert_kind_of Array, top_revenue_merchants
-    #most_revenue(x) returns the top x merchant instances ranked by total revenue
-  end
+    assert_equal 1, top_revenue_merchants[0].id
+   end
 
 end
