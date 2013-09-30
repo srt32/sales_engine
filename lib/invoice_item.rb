@@ -38,4 +38,8 @@ class InvoiceItem
     end
   end
 
-end
+  def successful_charge?
+    self.invoice.successful_charge?
+  end
+
+ end

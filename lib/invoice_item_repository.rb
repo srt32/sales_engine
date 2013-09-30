@@ -44,4 +44,11 @@ class InvoiceItemRepository
     end
   end
 
+  def total_quantity_sold
+    totals = self.all.each_with_object(Hash.new(0)) do |ii, ii_quantity|
+      ii_quantity[ii.item_id] += ii.quantity.to_i if ii.successful_charge?
+    end
+    sorted_totals = totals.sort_by{|_key,value| value}.reverse 
+  end
+
 end

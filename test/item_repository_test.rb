@@ -74,4 +74,12 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal "Schroeder-Jerde",item_merchant.name
   end
 
+  def test_it_returns_items_collection_of_quantity_sold
+    # most_items(x) returns the top x item instances ranked by total number sold
+    most_sold = @ir.most_items(2)
+    assert_kind_of Array, most_sold
+    assert_equal 2, most_sold.length
+    assert_equal 1, most_sold.first.id
+  end
+
 end

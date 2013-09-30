@@ -39,4 +39,12 @@ class InvoiceItemTest < MiniTest::Test
     assert_equal 0, @failed_ii.revenue    
   end
 
+  def test_it_returns_true_when_sent_successful_charge_on_good_ii
+    assert @successful_ii.successful_charge?
+  end
+
+  def test_it_returns_false_when_sent_successful_charge_on_bad_ii
+    refute @failed_ii.successful_charge?
+  end
+
 end

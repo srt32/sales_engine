@@ -85,4 +85,10 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal "Item Nemo Facere", ii_item.name
   end
 
+  def test_it_can_return_a_sorted_array_of_total_sold
+    totals_sold = @iir.total_quantity_sold
+    assert_kind_of Array, totals_sold
+    assert_equal [1,11], totals_sold[0]
+  end
+
 end
