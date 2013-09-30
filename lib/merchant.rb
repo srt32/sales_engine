@@ -24,4 +24,9 @@ class Merchant
     ir.find_all_by_merchant_id(self.id)
   end
 
+  def revenue
+    invoice_items = self.items.map {|item| item.invoice_items}
+    total_revenue = invoice_items.flatten.reduce(0) {|sum,invoice_item| sum + invoice_item.revenue}
+  end
+
 end
