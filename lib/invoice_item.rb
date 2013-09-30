@@ -30,4 +30,12 @@ class InvoiceItem
     item_repo.find_by_id(self.item_id)
   end
 
+  def revenue
+    if self.invoice.successful_charge?
+      revenue = self.quantity.to_i * self.unit_price.to_i
+    else
+      revenue = 0
+    end
+  end
+
 end
