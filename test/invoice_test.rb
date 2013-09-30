@@ -29,13 +29,16 @@ class InvoiceTest < Minitest::Test
   def test_it_can_return_true_if_it_has_a_successful_transaction
     status = @invoice.successful_charge?
     assert status
-    #go through the related transactions and return true if it has any
-    #successful transactions
   end
 
   def test_it_can_return_false_if_it_does_not_have_a_succssful_transaction
     status = @failed_invoice.successful_charge?
     refute status
+  end
+
+  def test_it_rolls_up_revenue_across_invoice_items_properly
+    invoice_total_revenue = @invoice.invoice_revenue
+    assert_equal 1645131, invoice_total_revenue
   end
 
 end

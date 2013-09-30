@@ -52,4 +52,8 @@ class Invoice
     self.transactions.any?{|t| t.successful?}
   end
 
+  def invoice_revenue
+    self.invoice_items.reduce(0){|result,ii| ii.revenue + result}
+  end
+
 end
