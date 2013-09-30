@@ -73,6 +73,14 @@ class MerchantRepositoryTest < MiniTest::Test
     assert_kind_of Merchant, top_revenue_merchants.first
     assert_kind_of Array, top_revenue_merchants
     assert_equal 1, top_revenue_merchants[0].id
-   end
+  end
+
+  def test_it_returns_merchant_collection_based_on_most_items_sold
+    most_sold = @mr.most_items(2)
+    assert_kind_of Array, most_sold
+    assert_equal 2, most_sold.length
+    assert_equal 1, most_sold.first.id
+    assert_equal "Schroeder-Jerde", most_sold.first.name
+  end
 
 end
