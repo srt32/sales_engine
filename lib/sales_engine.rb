@@ -24,27 +24,27 @@ class SalesEngine
   end
 
   def customer_repository(filepath= "#{data}/customers.csv")
-    CustomerRepository.new(filepath,self)
+    @customer_repository ||= CustomerRepository.new(filepath,self)
   end
 
   def invoice_item_repository(filepath= "#{data}/invoice_items.csv")
-    InvoiceItemRepository.new(filepath,self)
+    @invoice_item_repository ||= InvoiceItemRepository.new(filepath,self)
   end
 
   def invoice_repository(filepath= "#{data}/invoices.csv")
-    InvoiceRepository.new(filepath,self)
+    @invoice_repository ||= InvoiceRepository.new(filepath,self)
   end
 
   def item_repository(filepath = "#{data}/items.csv")
-    ItemRepository.new(filepath,self)
+    @item_repository ||= ItemRepository.new(filepath,self)
   end
 
   def merchant_repository(filepath = "#{data}/merchants.csv")
-    MerchantRepository.new(filepath,self)
+    @merchant_repository ||= MerchantRepository.new(filepath,self)
   end
 
   def transaction_repository(filepath = "#{data}/transactions.csv")
-    TransactionRepository.new(filepath,self)
+    @transaction_repository ||= TransactionRepository.new(filepath,self)
   end
 
 end
