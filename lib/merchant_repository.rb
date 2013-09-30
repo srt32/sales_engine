@@ -44,14 +44,26 @@ class MerchantRepository
   end
 
   def most_revenue(amount)
-   # go through invoices and sum across associated invoice_items rev
-    #### on invoice_item, get some for each ii THEN
-    #### on invoice create, total_revenue method that sums across i_i revenues
+    #-go get all the invoice_item.revenue counts and roll up by item_id
+    items_rev = engine.invoice_item_repository.all.each_with_object({}) do |ii, ii_revenue| 
+      #puts "ii.rev is #{ii.revenue}"
+      if ii_revenue[ii.item_id].nil?
+        ii_revenue[ii.item_id] = ii.revenue
+      else
+        ii_revenue[ii.item_id] += ii.revenue
+      end
+      #puts "ii.rev.total is #{ii_revenue[ii.id]}"
+      #puts "ii.id is #{ii.id}"
+    end
+    #return items_rev
 
-    # order the invoice revenues
-      # Could move this ordering into invoice class
-
-    # report back top x associated merchants
+    #-then sort by total sum by item_id
+    sorted_items = items_rev.sort_by{|_key,value| value}.reverse[amount]
+    #return sorted_items
+    
+    #-pull out merchant_id from the top of that list
+    merchants = sorted_items.collect {|merchant| engine.merchant_repository.find_by_id(merchant[0])}
+    return merchants
   end
 
 end
