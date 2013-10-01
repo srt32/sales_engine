@@ -55,5 +55,9 @@ class Invoice
   def invoice_revenue
     self.invoice_items.reduce(0){|result,ii| ii.revenue + result}
   end
+  
+  def quantity_of_items
+    invoice_items.reduce(0){|quantity,ii| quantity + ii.num_items}
+  end
 
 end

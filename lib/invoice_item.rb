@@ -42,4 +42,8 @@ class InvoiceItem
     self.invoice.successful_charge?
   end
 
+  def num_items
+    quantity.to_i 
+  end
+
  end

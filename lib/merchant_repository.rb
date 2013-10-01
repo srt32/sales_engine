@@ -45,22 +45,16 @@ class MerchantRepository
   end
 
   def most_revenue(amount)
-    sorted_items_rev = engine.invoice_item_repository.total_revenue_sold 
-    sorted_items = sorted_items_rev[0..amount-1]
-    top_items = sorted_items.collect {|item| engine.item_repository.find_by_id(item[0])}
-    merchants = top_items.collect {|item| find_by_id(item.merchant_id)}
-   # binding.pry
-    merchants = merchants.reject{|m| m.nil?}
-    #binding.pry
-    return merchants
+    top_revenue_items = engine.item_repository.most_revenue(amount)
+    top_revenue_merchants = top_revenue_items.collect{|item| item.merchant}
   end
 
   def most_items(amount)
-    totals_with_ids = engine.invoice_item_repository.total_quantity_sold[0..amount-1]
-    sorted_items = totals_with_ids.collect {|item| engine.item_repository.find_by_id(item[0])}
-    merchants = sorted_items.collect{|item| find_by_id(item.merchant_id)}
-    #binding.pry
-    return merchants
+    merchants_totals = all.each_with_object(Hash.new(0)) do |merchant, frequency|
+      frequency[merchant.id] += merchant.items_successfully_sold
+    end
+    top_selling_merchant_ids = merchants_totals.sort_by{|_,count| count}.reverse[0..amount-1]
+    winnders = top_selling_merchant_ids.collect{|merchant| find_by_id(merchant[0])}
   end
 
 end

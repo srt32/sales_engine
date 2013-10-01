@@ -45,4 +45,8 @@ class Merchant
     delinquent_customers = delinquent_customer_ids.collect{|c_id| merchant_repo_ref.engine.customer_repository.find_by_id(c_id)}
   end
 
+  def items_successfully_sold
+    invoices.reduce(0){|sum,invoice| sum += invoice.quantity_of_items}
+  end
+
 end
