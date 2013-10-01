@@ -52,7 +52,7 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 1, @ir.find_all_by_name("Item Qui Esse").count
     assert_equal 1,  @ir.find_all_by_description("Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.").count
     assert_equal 1, @ir.find_all_by_unit_price(BigDecimal.new("751.07")).count
-    assert_equal 4, @ir.find_all_by_merchant_id("1").count
+    assert_equal 3, @ir.find_all_by_merchant_id("1").count
     assert_equal 4, @ir.find_all_by_created_at("2012-03-27 14:53:59 UTC").count
     assert_equal 4, @ir.find_all_by_updated_at("2012-03-27 14:53:59 UTC").count
    end

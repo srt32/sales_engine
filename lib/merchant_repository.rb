@@ -47,14 +47,20 @@ class MerchantRepository
   def most_revenue(amount)
     sorted_items_rev = engine.invoice_item_repository.total_revenue_sold 
     sorted_items = sorted_items_rev[0..amount-1]
-    merchants = sorted_items.collect {|merchant| engine.merchant_repository.find_by_id(merchant[0])}
+    top_items = sorted_items.collect {|item| engine.item_repository.find_by_id(item[0])}
+    merchants = top_items.collect {|item| find_by_id(item.merchant_id)}
+   # binding.pry
     merchants = merchants.reject{|m| m.nil?}
-    binding.pry
+    #binding.pry
+    return merchants
   end
 
   def most_items(amount)
     totals_with_ids = engine.invoice_item_repository.total_quantity_sold[0..amount-1]
-    sorted_items = totals_with_ids.collect {|item| self.find_by_id(item[0])}
+    sorted_items = totals_with_ids.collect {|item| engine.item_repository.find_by_id(item[0])}
+    merchants = sorted_items.collect{|item| find_by_id(item.merchant_id)}
+    #binding.pry
+    return merchants
   end
 
 end

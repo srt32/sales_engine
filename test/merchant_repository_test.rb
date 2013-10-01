@@ -57,7 +57,7 @@ class MerchantRepositoryTest < MiniTest::Test
   def test_it_returns_items_collection_given_a_merchant
     first_merchant = @mr.find_by_id("1")                       
     first_merchant_items = first_merchant.items
-    assert_equal 4, first_merchant_items.count
+    assert_equal 3, first_merchant_items.count
     assert_equal "Item Qui Esse", first_merchant_items[0].name
   end
 
@@ -72,12 +72,13 @@ class MerchantRepositoryTest < MiniTest::Test
     top_revenue_merchants = @mr.most_revenue(2)
     assert_kind_of Merchant, top_revenue_merchants.first
     assert_kind_of Array, top_revenue_merchants
-    assert_equal 1, top_revenue_merchants[0].id
+    assert_equal 2, top_revenue_merchants[0].id
   end
 
   def test_it_returns_merchant_collection_based_on_most_items_sold
     most_sold = @mr.most_items(2)
     assert_kind_of Array, most_sold
+    assert_kind_of Merchant, most_sold.first
     assert_equal 2, most_sold.length
     assert_equal 1, most_sold.first.id
     assert_equal "Schroeder-Jerde", most_sold.first.name

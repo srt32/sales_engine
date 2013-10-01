@@ -22,7 +22,7 @@ class MerchantTest < MiniTest::Test
 
   def test_it_returns_total_revenue_across_all_successful_transactions
     revenue = @merchant.revenue
-    assert_equal 1049468, revenue
+    assert_equal 495488, revenue
   end
 
   def test_it_returns_favorite_customer
