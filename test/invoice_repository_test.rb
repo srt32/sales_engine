@@ -67,7 +67,7 @@ class InvoiceRepositoryTest < MiniTest::Test
   def test_it_returns_invoice_items_collection_given_an_invoice
     first_invoice = @instance.find_by_id("1")
     first_invoice_invoice_items = first_invoice.invoice_items
-    assert_equal 7, first_invoice_invoice_items.count
+    assert_equal 6, first_invoice_invoice_items.count
     assert_equal "13635", first_invoice_invoice_items[0].unit_price
   end
 

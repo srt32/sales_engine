@@ -51,10 +51,12 @@ class MerchantRepository
 
   def most_items(amount)
     merchants_totals = all.each_with_object(Hash.new(0)) do |merchant, frequency|
-      frequency[merchant.id] += merchant.items_successfully_sold
+      frequency[merchant.id] = merchant.items_successfully_sold
     end
     top_selling_merchant_ids = merchants_totals.sort_by{|_,count| count}.reverse[0..amount-1]
-    winnders = top_selling_merchant_ids.collect{|merchant| find_by_id(merchant[0])}
+    winners = top_selling_merchant_ids.collect{|merchant| find_by_id(merchant[0])}
+    #binding.pry
+    #return winners
   end
 
 end

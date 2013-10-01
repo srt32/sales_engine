@@ -59,7 +59,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def test_it_returns_correct_count_of_merchants_by_all_attributes
     assert_equal 1, @iir.find_all_by_id("1").count
     assert_equal 1, @iir.find_all_by_item_id("539").count
-    assert_equal 7, @iir.find_all_by_invoice_id("1").count
+    assert_equal 6, @iir.find_all_by_invoice_id("1").count
     assert_equal 2, @iir.find_all_by_quantity("5").count
     assert_equal 1, @iir.find_all_by_unit_price("13635").count
     assert_equal 10, @iir.find_all_by_created_at("2012-03-27 14:54:09 UTC").count 

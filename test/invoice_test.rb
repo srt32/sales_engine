@@ -38,7 +38,7 @@ class InvoiceTest < Minitest::Test
 
   def test_it_rolls_up_revenue_across_invoice_items_properly
     invoice_total_revenue = @invoice.invoice_revenue
-    assert_equal 1645131, invoice_total_revenue
+    assert_equal 1378143, invoice_total_revenue
   end
 
 end
