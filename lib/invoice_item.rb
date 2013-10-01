@@ -5,8 +5,6 @@ class InvoiceItem
               :invoice_id,
               :quantity,
               :unit_price,
-              :created_at,
-              :updated_at,
               :invoice_item_repo_ref
 
   def initialize(input = {})
@@ -15,9 +13,17 @@ class InvoiceItem
     @invoice_id = input[:invoice_id].to_i
     @quantity = input[:quantity]
     @unit_price = input[:unit_price]
-    @created_at = input[:created_at]
-    @updated_at = input[:updated_at]
+    @created_at_raw = input[:created_at]
+    @updated_at_raw = input[:updated_at]
     @invoice_item_repo_ref = input[:invoice_item_repo_ref]
+  end
+
+  def created_at
+    @created_at ||= DateTime.strptime(@created_at_raw,"%Y-%m-%d %H:%M:%S").to_date
+  end
+
+  def updated_at
+    @updated_at ||= DateTime.strptime(@created_at_raw,"%Y-%m-%d %H:%M:%S").to_date
   end
 
   def invoice

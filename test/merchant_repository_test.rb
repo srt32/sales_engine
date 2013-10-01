@@ -72,8 +72,8 @@ class MerchantRepositoryTest < MiniTest::Test
     top_revenue_merchants = @mr.most_revenue(2)
     assert_kind_of Merchant, top_revenue_merchants.first
     assert_kind_of Array, top_revenue_merchants
-    assert_equal 1, top_revenue_merchants[0].id
-    assert_equal "Klein, Rempel and Jones", top_revenue_merchants.last.name
+    assert_equal 2, top_revenue_merchants[0].id
+    assert_equal "Schroeder-Jerde", top_revenue_merchants.last.name
   end
 
   def test_it_returns_merchant_collection_based_on_most_items_sold
@@ -86,10 +86,17 @@ class MerchantRepositoryTest < MiniTest::Test
     assert_equal "Klein, Rempel and Jones", most_sold.last.name
   end
 
-  def test_it_returns_revenue_for_the_given_date
-    date = "1/1/2013"
-    all_revenue = @mr.revenue(date)
-    assert_equal 12345, all_revenue
+  def test_it_returns_all_revenue_when_given_no_date
+    date = Date.parse "Fri, 27 Mar 2012"
+    all_revenue = @mr.revenue
+    assert_equal 2137424, all_revenue
+  end
+
+  def test_it_returns_subset_of_all_revenue_when_given_a_date
+    skip
+    date = Date.parse "Fri, 28 Mar 2012"
+    mar28_revenue = @mr.revenue(date)
+    assert_equal 553980, mar28_revenue
   end
 
 end

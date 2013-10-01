@@ -60,4 +60,12 @@ class MerchantRepository
     winners = top_selling_merchant_ids.collect{|merchant| find_by_id(merchant[0])}
   end
 
+  def revenue(date = "")
+    if date == ""
+      all.reduce(0){|sum,merchant| sum += merchant.revenue}
+    else
+      "figure it out - COME BACK AFTER finishing merchant#revenue"
+    end
+  end
+
 end

@@ -22,7 +22,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_it_populates_all_array_from_csv
-    assert_equal 10, @iir.all.count
+    assert_equal 11, @iir.all.count
   end
 
   def test_it_populates_all_the_invoice_items_data
@@ -63,7 +63,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 2, @iir.find_all_by_quantity("5").count
     assert_equal 1, @iir.find_all_by_unit_price("13635").count
     assert_equal 10, @iir.find_all_by_created_at("2012-03-27 14:54:09 UTC").count 
-    assert_equal 10, @iir.find_all_by_updated_at("2012-03-27 14:54:09 UTC").count  
+    assert_equal 11, @iir.find_all_by_updated_at("2012-03-27 14:54:09 UTC").count  
   end
 
   def test_it_returns_empty_array_for_all_item_id_when_no_results

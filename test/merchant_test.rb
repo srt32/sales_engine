@@ -20,9 +20,15 @@ class MerchantTest < MiniTest::Test
     assert_kind_of MerchantRepository, @merchant.merchant_repo_ref
   end
 
-  def test_it_returns_total_revenue_across_all_successful_transactions
+  def test_it_returns_total_revenue_across_all_successful_transactions_given_no_date
     revenue = @merchant.revenue
     assert_equal 1029464, revenue
+  end
+
+  def test_it_returns_subset_of_total_revenue_given_a_date
+    date = Date.parse "Fri, 28 Mar 2012"
+    mar28_revenue = @merchant.revenue(date)
+    assert_equal 553980, mar28_revenue
   end
 
   def test_it_returns_favorite_customer

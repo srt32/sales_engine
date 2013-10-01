@@ -25,9 +25,10 @@ class Merchant
     ir.find_all_by_merchant_id(self.id)
   end
 
-  def revenue
+  def revenue(date = "")
     invoice_items = self.items.map {|item| item.invoice_items}
-    total_revenue = invoice_items.flatten.reduce(0) {|sum,invoice_item| sum + invoice_item.revenue}
+    invoice_items_within_range = invoice_items.flatten.select{|ii| date == "" ? true : ii.created_at == date}
+    total_revenue = invoice_items_within_range.reduce(0) {|sum,invoice_item| sum + invoice_item.revenue}
   end
 
   def favorite_customer
