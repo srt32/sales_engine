@@ -10,6 +10,12 @@ class MerchantTest < MiniTest::Test
                             :created_at => "2012-03-27 14:54:09 UTC", 
                             :updated_at => "2012-03-27 14:54:10 UTC",
                             :merchant_repo_ref => MerchantRepository.new("./test/fixtures/merchants_test.csv",SalesEngine.new("./test/fixtures")))
+   @second_merchant = Merchant.new(:id => "2",
+                            :name => "Big Gigantic", 
+                            :created_at => "2012-03-27 14:54:09 UTC", 
+                            :updated_at => "2012-03-27 14:54:10 UTC",
+                            :merchant_repo_ref => MerchantRepository.new("./test/fixtures/merchants_test.csv",SalesEngine.new("./test/fixtures")))
+   
   end
 
   def test_it_can_be_give_all_its_attributes
@@ -27,7 +33,7 @@ class MerchantTest < MiniTest::Test
 
   def test_it_returns_subset_of_total_revenue_given_a_date
     date = Date.parse "Fri, 28 Mar 2012"
-    mar28_revenue = @merchant.revenue(date)
+    mar28_revenue = @second_merchant.revenue(date)
     assert_equal 553980, mar28_revenue
   end
 

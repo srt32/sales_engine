@@ -6,6 +6,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
   
   def setup
     @iir = InvoiceItemRepository.new("./test/fixtures/invoice_items.csv",SalesEngine.new("./test/fixtures"))
+    @dummy_date = Date.parse "Fri, 27 Mar 2012"
   end
 
   def test_it_is_initialized_with_a_filepath
@@ -33,8 +34,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 1, first_invoice_item.invoice_id
     assert_equal "5", first_invoice_item.quantity
     assert_equal "13635", first_invoice_item.unit_price
-    assert_equal "2012-03-27 14:54:09 UTC", first_invoice_item.created_at 
-    assert_equal "2012-03-27 14:54:09 UTC", first_invoice_item.updated_at
+    assert_equal @dummy_date, first_invoice_item.created_at 
+    assert_equal @dummy_date, first_invoice_item.updated_at
   end
 
   def test_it_can_select_a_random_customer_from_all
@@ -52,8 +53,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 1, @iir.find_by_invoice_id("1").invoice_id
     assert_equal "5", @iir.find_by_quantity("5").quantity
     assert_equal "13635", @iir.find_by_unit_price("13635").unit_price
-    assert_equal "2012-03-27 14:54:09 UTC", @iir.find_by_created_at("2012-03-27 14:54:09 UTC").created_at 
-    assert_equal "2012-03-27 14:54:09 UTC", @iir.find_by_updated_at("2012-03-27 14:54:09 UTC").updated_at 
+    assert_equal @dummy_date, @iir.find_by_created_at(@dummy_date).created_at 
+    assert_equal @dummy_date, @iir.find_by_updated_at(@dummy_date).updated_at 
   end
 
   def test_it_returns_correct_count_of_merchants_by_all_attributes
@@ -62,8 +63,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 6, @iir.find_all_by_invoice_id("1").count
     assert_equal 2, @iir.find_all_by_quantity("5").count
     assert_equal 1, @iir.find_all_by_unit_price("13635").count
-    assert_equal 10, @iir.find_all_by_created_at("2012-03-27 14:54:09 UTC").count 
-    assert_equal 11, @iir.find_all_by_updated_at("2012-03-27 14:54:09 UTC").count  
+    assert_equal 10, @iir.find_all_by_created_at(@dummy_date).count 
+    assert_equal 10, @iir.find_all_by_updated_at(@dummy_date).count  
   end
 
   def test_it_returns_empty_array_for_all_item_id_when_no_results
