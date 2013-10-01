@@ -44,18 +44,10 @@ class MerchantRepository
   end
 
   def most_revenue(amount)
-   items_rev = engine.invoice_item_repository.all.each_with_object({}) do |ii, ii_revenue| 
-     if ii_revenue[ii.item_id].nil?
-        ii_revenue[ii.item_id] = ii.revenue
-      else
-        ii_revenue[ii.item_id] += ii.revenue
-      end
-     end
-
-    sorted_items = items_rev.sort_by{|_key,value| value}.reverse[0..amount]
+    sorted_items_rev = engine.invoice_item_repository.total_revenue_sold 
+    sorted_items = sorted_items_rev[0..amount-1]
     merchants = sorted_items.collect {|merchant| engine.merchant_repository.find_by_id(merchant[0])}
-    merchants = merchants.select{|m| !m.nil?}
-    return merchants
+    merchants = merchants.reject{|m| m.nil?}
   end
 
   def most_items(amount)
