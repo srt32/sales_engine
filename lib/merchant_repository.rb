@@ -50,8 +50,6 @@ class MerchantRepository
     end
     top_revenue_merchant_ids = merchants_totals.sort_by{|_,sum| sum}.reverse[0..amount-1]
     winners = top_revenue_merchant_ids.collect{|merchant| find_by_id(merchant[0])}
-    #binding.pry
-    #return winners
   end
 
   def most_items(amount)
@@ -60,8 +58,6 @@ class MerchantRepository
     end
     top_selling_merchant_ids = merchants_totals.sort_by{|_,count| count}.reverse[0..amount-1]
     winners = top_selling_merchant_ids.collect{|merchant| find_by_id(merchant[0])}
-    #binding.pry
-    #return winners
   end
 
 end
