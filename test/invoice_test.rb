@@ -21,9 +21,17 @@ class InvoiceTest < Minitest::Test
     assert_equal 1, @invoice.customer_id
     assert_equal 44, @invoice.merchant_id
     assert_equal "shipped", @invoice.status
-    assert_equal "2012-03-27 14:54:09 UTC", @invoice.created_at
-    assert_equal "2012-03-27 14:54:10 UTC", @invoice.updated_at
+    assert_equal created_at_date, @invoice.created_at
+    assert_equal updated_at_date, @invoice.updated_at
     assert_kind_of InvoiceRepository, @invoice.invoice_repo_ref
+  end
+
+  def created_at_date
+    DateTime.strptime("2012-03-27 14:54:09 UTC","%Y-%m-%d %H:%M:%S").to_date
+  end
+
+  def updated_at_date
+    DateTime.strptime("2012-03-27 14:54:10 UTC","%Y-%m-%d %H:%M:%S").to_date 
   end
 
   def test_it_can_return_true_if_it_has_a_successful_transaction

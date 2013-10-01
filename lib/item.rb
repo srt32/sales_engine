@@ -34,4 +34,11 @@ class Item
     item_repo_ref.engine.merchant_repository.find_by_id(self.merchant_id)
   end
 
+  def best_day
+    daily_counts = invoice_items.each_with_object(Hash.new(0)) do |ii,daily_amt| 
+      daily_amt[ii.invoice.created_at] += ii.quantity.to_i
+    end
+    awesome_day = daily_counts.sort_by{|_,value| value}.reverse[0][0]
+  end
+
 end

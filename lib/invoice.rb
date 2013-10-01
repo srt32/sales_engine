@@ -12,9 +12,17 @@ class Invoice
     @customer_id = input[:customer_id].to_i
     @merchant_id = input[:merchant_id].to_i
     @status = input[:status]
-    @created_at = input[:created_at]
-    @updated_at = input[:updated_at]
+    @created_at_raw = input[:created_at]
+    @updated_at_raw = input[:updated_at]
     @invoice_repo_ref = input[:invoice_repo_ref]
+  end
+
+  def created_at
+    @created_at ||= DateTime.strptime(@created_at_raw,"%Y-%m-%d %H:%M:%S").to_date
+  end
+
+  def updated_at
+    @updated_at ||= DateTime.strptime(@created_at_raw,"%Y-%m-%d %H:%M:%S").to_date
   end
 
   def transactions
