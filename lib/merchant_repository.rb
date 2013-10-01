@@ -1,4 +1,5 @@
 require 'csv'
+require 'pry'
 
 class MerchantRepository
 
@@ -48,6 +49,7 @@ class MerchantRepository
     sorted_items = sorted_items_rev[0..amount-1]
     merchants = sorted_items.collect {|merchant| engine.merchant_repository.find_by_id(merchant[0])}
     merchants = merchants.reject{|m| m.nil?}
+    binding.pry
   end
 
   def most_items(amount)
