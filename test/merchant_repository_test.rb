@@ -93,7 +93,6 @@ class MerchantRepositoryTest < MiniTest::Test
   end
 
   def test_it_returns_subset_of_all_revenue_when_given_a_date
-    skip
     date = Date.parse "Fri, 28 Mar 2012"
     mar28_revenue = @mr.revenue(date)
     assert_equal 553980, mar28_revenue

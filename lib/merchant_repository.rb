@@ -61,11 +61,7 @@ class MerchantRepository
   end
 
   def revenue(date = "")
-    if date == ""
-      all.reduce(0){|sum,merchant| sum += merchant.revenue}
-    else
-      "figure it out - COME BACK AFTER finishing merchant#revenue"
-    end
-  end
-
+     all.reduce(0){|sum,merchant| sum += merchant.revenue(date)}
+  end    
+  
 end
