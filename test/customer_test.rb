@@ -26,7 +26,7 @@ class CustomerTest < MiniTest::Test
   def test_it_returns_transactions_array_for_the_customer
     transactions = @customer.transactions
     assert_kind_of Transaction, transactions[0]
-    assert_equal 7, transactions.length
+    assert_equal 8, transactions.length
     assert_equal 1, transactions[0].id
   end
 

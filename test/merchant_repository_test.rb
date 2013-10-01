@@ -64,7 +64,7 @@ class MerchantRepositoryTest < MiniTest::Test
   def test_it_returns_invoices_collection_given_a_merchant
     first_merchant = @mr.find_by_id("1")
     first_merchant_invoices = first_merchant.invoices
-    assert_equal 3, first_merchant_invoices.count
+    assert_equal 4, first_merchant_invoices.count
   end
 
   def test_it_returns_top_merchant_when_sent_most_revenue

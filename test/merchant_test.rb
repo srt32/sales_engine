@@ -31,4 +31,10 @@ class MerchantTest < MiniTest::Test
     assert_equal 1, fav_customer.id
   end
 
+  def test_it_returns_customers_with_outstanding_charges
+    customers = @merchant.customers_with_pending_invoices
+    assert_kind_of Customer, customers[0]
+    assert_equal 3, customers[0].id 
+  end
+
 end

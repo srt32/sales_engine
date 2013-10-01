@@ -16,7 +16,7 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_that_repo_is_populated_with_data
-    assert_equal 10, @instance.all.count
+    assert_equal 11, @instance.all.count
   end
 
   def test_that_all_attributes_make_it_through_the_parsing
@@ -41,10 +41,10 @@ class TransactionRepositoryTest < Minitest::Test
   def test_it_returns_find_all
     assert_equal 1, @instance.find_all_by_id("1").count
     assert_equal 2, @instance.find_all_by_invoice_id("1").count
-    assert_equal 2, @instance.find_all_by_credit_card_number("4654405418249632").count
+    assert_equal 3, @instance.find_all_by_credit_card_number("4654405418249632").count
     assert_equal 8, @instance.find_all_by_created_at("2012-03-27 14:54:10 UTC").count
     assert_equal 8, @instance.find_all_by_updated_at("2012-03-27 14:54:10 UTC").count
-    assert_equal 8, @instance.find_all_by_result("success").count
+    assert_equal 9, @instance.find_all_by_result("success").count
   end
 
   def test_it_returns_empty_array_for_all_name_when_no_results

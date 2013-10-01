@@ -1,3 +1,4 @@
+#require 'pry'
 class Merchant
 
   attr_reader :id,
@@ -30,13 +31,18 @@ class Merchant
   end
 
   def favorite_customer
-    merchant_invoices = merchant_repo_ref.engine.invoice_repository.find_all_by_merchant_id(self.id)
-    successful_invoices = merchant_invoices.select{|i| i.successful_charge?}
+    successful_invoices = invoices.select{|i| i.successful_charge?}
     customer_invoice_totals = successful_invoices.each_with_object(Hash.new(0)) do |invoice,cust_total|
       cust_total[invoice.customer_id] += 1
     end
     top_customer_id = customer_invoice_totals.sort_by{|_key,value| value}.reverse[0][0]
     merchant_repo_ref.engine.customer_repository.find_by_id(top_customer_id)
+  end
+
+  def customers_with_pending_invoices
+    outstanding_invoices = invoices.reject{|i| i.successful_charge?}
+    delinquent_customer_ids = outstanding_invoices.collect{|invoice| invoice.customer_id}
+    delinquent_customers = delinquent_customer_ids.collect{|c_id| merchant_repo_ref.engine.customer_repository.find_by_id(c_id)}
   end
 
 end
