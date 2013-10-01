@@ -26,4 +26,14 @@ class Customer
     transactions.flatten
   end
 
+  def favorite_merchant
+    successful_transactions = transactions.select{|t| t.successful?} 
+    invoices = successful_transactions.collect {|t| t.invoice}
+    merchant_invoices_totals = invoices.each_with_object(Hash.new(0)) do |invoice,merch_total|
+      merch_total[invoice.merchant_id] += 1
+    end
+    top_merchant_id = merchant_invoices_totals.sort_by{|_key,value| value}.reverse[0][0]
+    customer_repo_ref.engine.merchant_repository.find_by_id(top_merchant_id) 
+  end
+
 end

@@ -10,7 +10,7 @@ class CustomerTest < MiniTest::Test
                             :last_name => "Bolivar",
                             :created_at => "2012-03-27 14:54:09 UTC",
                             :updated_at => "2012-03-27 14:54:10 UTC",
-                            :customer_repo_ref => CustomerRepository.new("./test/fixtures/customers.csv",SalesEngine.new))
+                            :customer_repo_ref => CustomerRepository.new("./test/fixtures/customers.csv",SalesEngine.new("./test/fixtures")))
      
   end
 
@@ -28,6 +28,12 @@ class CustomerTest < MiniTest::Test
     assert_kind_of Transaction, transactions[0]
     assert_equal 7, transactions.length
     assert_equal 1, transactions[0].id
+  end
+
+  def test_it_returns_most_popular_merchant
+    merchant = @customer.favorite_merchant
+    assert_kind_of Merchant, merchant
+    assert_equal 1, merchant.id
   end
 
 end
