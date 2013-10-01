@@ -25,4 +25,10 @@ class MerchantTest < MiniTest::Test
     assert_equal 1049468, revenue
   end
 
+  def test_it_returns_favorite_customer
+    fav_customer = @merchant.favorite_customer
+    assert_kind_of Customer, fav_customer
+    assert_equal 1, fav_customer.id
+  end
+
 end
