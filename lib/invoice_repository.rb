@@ -52,6 +52,7 @@ class InvoiceRepository
     })
     all << new_invoice
     new_invoice.create_related_invoice_items(related_items)
+    return new_invoice
   end
 
   %w(id customer_id merchant_id status created_at updated_at).each do |attribute|
