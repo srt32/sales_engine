@@ -27,7 +27,7 @@ class Merchant
 
   def revenue(date = "")
     invoice_items = self.items.map {|item| item.invoice_items}
-    invoice_items_within_range = invoice_items.flatten.select{|ii| date == "" ? true : ii.created_at == date}
+    invoice_items_within_range = invoice_items.flatten.select{|ii| date == "" ? true : ii.invoice.created_at == date}
     total_revenue = invoice_items_within_range.reduce(0) {|sum,invoice_item| sum + invoice_item.revenue}
   end
 
