@@ -87,15 +87,14 @@ class MerchantRepositoryTest < MiniTest::Test
   end
 
   def test_it_returns_all_revenue_when_given_no_date
-    date = Date.parse "Fri, 27 Mar 2012"
     all_revenue = @mr.revenue
-    assert_equal 2137424, all_revenue
+    assert_equal BigDecimal.new("21374.24"), all_revenue
   end
 
   def test_it_returns_subset_of_all_revenue_when_given_a_date
     date = Date.parse "Fri, 28 Mar 2012"
     mar28_revenue = @mr.revenue(date)
-    assert_equal 553980, mar28_revenue
+    assert_equal BigDecimal.new("5539.80"), mar28_revenue
   end
 
 end

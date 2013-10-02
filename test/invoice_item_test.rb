@@ -28,7 +28,7 @@ class InvoiceItemTest < MiniTest::Test
     assert_equal 100, @successful_ii.item_id
     assert_equal 1, @successful_ii.invoice_id
     assert_equal "4", @successful_ii.quantity
-    assert_equal "4000", @successful_ii.unit_price
+    assert_equal BigDecimal.new("40.00"), @successful_ii.unit_price
     assert_equal created_at_date, @successful_ii.created_at
     assert_equal updated_at_date, @successful_ii.updated_at
     assert_kind_of InvoiceItemRepository, @successful_ii.invoice_item_repo_ref
@@ -43,7 +43,7 @@ class InvoiceItemTest < MiniTest::Test
   end
 
   def test_it_calculates_revenue_for_item_with_a_successful_invoice
-    assert_equal 16000, @successful_ii.revenue
+    assert_equal BigDecimal.new("160.00"), @successful_ii.revenue
     assert_equal 0, @failed_ii.revenue    
   end
 

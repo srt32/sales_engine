@@ -33,7 +33,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 539, first_invoice_item.item_id
     assert_equal 1, first_invoice_item.invoice_id
     assert_equal "5", first_invoice_item.quantity
-    assert_equal "13635", first_invoice_item.unit_price
+    assert_equal BigDecimal("136.35"), first_invoice_item.unit_price
     assert_equal @dummy_date, first_invoice_item.created_at 
     assert_equal @dummy_date, first_invoice_item.updated_at
   end
@@ -52,7 +52,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 539,@iir.find_by_item_id("539").item_id
     assert_equal 1, @iir.find_by_invoice_id("1").invoice_id
     assert_equal "5", @iir.find_by_quantity("5").quantity
-    assert_equal "13635", @iir.find_by_unit_price("13635").unit_price
+    assert_equal BigDecimal.new("136.35"), @iir.find_by_unit_price(BigDecimal.new("136.35")).unit_price
     assert_equal @dummy_date, @iir.find_by_created_at(@dummy_date).created_at 
     assert_equal @dummy_date, @iir.find_by_updated_at(@dummy_date).updated_at 
   end
@@ -62,7 +62,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 1, @iir.find_all_by_item_id("539").count
     assert_equal 6, @iir.find_all_by_invoice_id("1").count
     assert_equal 2, @iir.find_all_by_quantity("5").count
-    assert_equal 1, @iir.find_all_by_unit_price("13635").count
+    assert_equal 1, @iir.find_all_by_unit_price(BigDecimal.new("136.35")).count
     assert_equal 10, @iir.find_all_by_created_at(@dummy_date).count 
     assert_equal 10, @iir.find_all_by_updated_at(@dummy_date).count  
   end

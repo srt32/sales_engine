@@ -12,10 +12,14 @@ class InvoiceItem
     @item_id = input[:item_id].to_i
     @invoice_id = input[:invoice_id].to_i
     @quantity = input[:quantity]
-    @unit_price = input[:unit_price]
+    @unit_price = convert_cents_string_into_big_decimal(input[:unit_price])
     @created_at_raw = input[:created_at]
     @updated_at_raw = input[:updated_at]
     @invoice_item_repo_ref = input[:invoice_item_repo_ref]
+  end
+
+  def convert_cents_string_into_big_decimal(input_string)
+    BigDecimal.new((input_string.to_i/100.0).to_s)
   end
 
   def created_at
@@ -38,9 +42,9 @@ class InvoiceItem
 
   def revenue
     if self.invoice.successful_charge?
-      revenue = self.quantity.to_i * self.unit_price.to_i
+      self.quantity.to_i * self.unit_price
     else
-      revenue = 0
+      BigDecimal.new("0.00")
     end
   end
 
