@@ -87,7 +87,7 @@ class Invoice
                                   :invoice_id => self.id,
                                   :quantity => item[1],
                                   :unit_price => "100",
-                                  :invoice_item_repo_re => invoice_item_repo}
+                                  :invoice_item_repo_ref => invoice_item_repo}
       invoice_item_repo.create(invoice_item_create_hash)
     end
   end
