@@ -133,13 +133,13 @@ class InvoiceRepositoryTest < MiniTest::Test
                      merchant: merchant1,
                      status: "shipped",
                      items: [item1, item1, item2])
-    previous_invoice_item_count = @instance.engine.invoice_item_repository.all.count
+    previous_invoice_item_count = 11
     new_invoice_item_count = @instance.engine.invoice_item_repository.all.count
     assert_equal previous_invoice_item_count + 2, new_invoice_item_count 
     assert_equal 12, @instance.engine.invoice_item_repository.all[-1].invoice_id
-    assert_equal item1.id, @instance.engine.invoice_item_repository.all[-1].item_id
-    assert_equal 2, @instance.engine.invoice_item_repository.all[-1].quantity
-    assert_equal 1, @instance.engine.invoice_item_repository.all[0].quantity
+    assert_equal item1.id, @instance.engine.invoice_item_repository.all[-2].item_id
+    assert_equal 2, @instance.engine.invoice_item_repository.all[-2].quantity
+    assert_equal 1, @instance.engine.invoice_item_repository.all[-1].quantity
   end
 
 end

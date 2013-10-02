@@ -85,6 +85,7 @@ class Invoice
     invoice_items_to_create.each do |item|
       invoice_item_create_hash = {:id => invoice_item_repo.all.max_by{|ii| ii.id}.id + 1,
                                   :item_id => item[0],
+                                  :invoice_id => self.id,
                                   :quantity => item[1],
                                   :unit_price => "100",
                                   :invoice_item_repo_re => invoice_item_repo}

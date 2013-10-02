@@ -58,4 +58,9 @@ class InvoiceItemRepository
     sorted_totals = totals.sort_by{|_key,value| value}.reverse
   end
 
+  def create(input)
+    new_invoice_item = InvoiceItem.new(input)
+    all << new_invoice_item
+  end
+  
 end
