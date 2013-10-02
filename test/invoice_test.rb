@@ -50,13 +50,12 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_can_create_a_new_transaction_when_told_charge
-    previous_transaction_count = @invoice.invoice_repo_ref.engine.transaction_repository.all.count
+    previous_transaction_count = @invoice.transactions.count
     @invoice.charge({invoice_id: @invoice.id,
                     credit_card_number: "1234567890",
                     credit_card_expiration: "10/13",
                     result: "success"})
-    assert_equal previous_transaction_count + 1, @invoice.invoice_repo_ref.engine.transaction_repository.all.count
-    
+  assert_equal previous_transaction_count + 1, @invoice.transactions.count 
   end
   
 end
