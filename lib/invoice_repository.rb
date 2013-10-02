@@ -32,6 +32,26 @@ class InvoiceRepository
     all.sample
   end
 
+  def create(input)
+    new_id = all.max_by{|invoice| invoice.id}.id + 1
+    new_customer_id = input[:customer].id
+    new_merchant_id = input[:merchant].id
+    new_status = input[:status]
+    new_created_at = Time.now.to_date
+    new_updated_at = Time.now.to_date
+    new_invoice_repo_ref = self
+
+    new_invoice = Invoice.new({:id => new_id,
+                               :customer_id => new_customer_id,
+                               :merchant_id => new_merchant_id,
+                               :status => new_status,
+                               :created_at => new_created_at,
+                               :updated_at => new_updated_at,
+                               :invoice_repo_ref => new_invoice_repo_ref
+    })
+    all << new_invoice
+  end
+
   %w(id customer_id merchant_id status created_at updated_at).each do |attribute|
     define_method("find_by_#{attribute}") do |criteria|
       all.find{|c| c.send(attribute).to_s == criteria.to_s}
