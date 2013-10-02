@@ -125,13 +125,15 @@ class InvoiceRepositoryTest < MiniTest::Test
   end
  
   def test_it_creates_two_related_invoice_items
-    skip
-    previous_invoice_item_count = @instance.engine.invoice_item_repository.all.count
+    customer1 = @instance.engine.customer_repository.find_by_id(1)
+    merchant1 = @instance.engine.merchant_repository.find_by_id(1)
+    item1 = @instance.engine.item_repository.find_by_id(1)
+    item2 = @instance.engine.item_repository.find_by_id(2)
     @instance.create(customer: customer1,
                      merchant: merchant1,
                      status: "shipped",
                      items: [item1, item1, item2])
-    new_invoice = @instance.all.last
+    previous_invoice_item_count = @instance.engine.invoice_item_repository.all.count
     new_invoice_item_count = @instance.engine.invoice_item_repository.all.count
     assert_equal previous_invoice_item_count + 2, new_invoice_item_count 
     assert_equal 12, @instance.engine.invoice_item_repository.all[-1].invoice_id

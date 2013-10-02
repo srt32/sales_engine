@@ -50,6 +50,7 @@ class InvoiceRepository
                                :invoice_repo_ref => new_invoice_repo_ref
     })
     all << new_invoice
+    new_invoice.create_related_invoice_items
   end
 
   %w(id customer_id merchant_id status created_at updated_at).each do |attribute|
