@@ -94,7 +94,7 @@ class Invoice
 
   def charge(input)
     transaction_create_hash = {:id => invoice_repo_ref.engine.invoice_repository.all.max_by{|inv| inv.id}.id + 1,
-                               :invoice_id => input[:invoice_id],
+                               :invoice_id => self.id,
                                :credit_card_number => input[:credit_card_number],
                                :result => input[:result],
                                :created_at => Time.now.to_date,
