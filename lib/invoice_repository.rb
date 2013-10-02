@@ -40,7 +40,8 @@ class InvoiceRepository
     new_created_at = Time.now.to_date
     new_updated_at = Time.now.to_date
     new_invoice_repo_ref = self
-
+    related_items = input[:items] 
+    
     new_invoice = Invoice.new({:id => new_id,
                                :customer_id => new_customer_id,
                                :merchant_id => new_merchant_id,
@@ -50,7 +51,7 @@ class InvoiceRepository
                                :invoice_repo_ref => new_invoice_repo_ref
     })
     all << new_invoice
-    new_invoice.create_related_invoice_items
+    new_invoice.create_related_invoice_items(related_items)
   end
 
   %w(id customer_id merchant_id status created_at updated_at).each do |attribute|

@@ -72,4 +72,24 @@ class Invoice
     end
   end
 
+  def invoice_item_repo
+    invoice_repo_ref.engine.invoice_item_repository 
+  end
+  
+  def create_related_invoice_items(related_items)
+    #get quantity for each item on the new invoice
+    invoice_items_to_create = related_items.each_with_object(Hash.new(0)) do |item,quantities|
+      quantities[item.id] += 1
+    end
+    
+    invoice_items_to_create.each do |item|
+      invoice_item_create_hash = {:id => invoice_item_repo.all.max_by{|ii| ii.id}.id + 1,
+                                  :item_id => item[0],
+                                  :quantity => item[1],
+                                  :unit_price => "100",
+                                  :invoice_item_repo_re => invoice_item_repo}
+      invoice_item_repo.create(invoice_item_create_hash)
+    end
+  end
+
 end
