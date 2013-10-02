@@ -49,5 +49,11 @@ class InvoiceTest < Minitest::Test
     assert_equal BigDecimal.new("13781.43"), invoice_total_revenue
   end
 
+  def test_it_can_create_a_new_transaction_when_told_charge
+    previous_transaction_count = @invoice.invoice_repo_ref.engine.transaction_repository.all.count
+    @invoice.charge()
+    assert previous_transaction_count + 1, @invoice.invoice_repo_ref.engine.transaction_repository.all.count
+  end
+  
 end
 
