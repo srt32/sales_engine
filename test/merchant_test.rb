@@ -32,7 +32,7 @@ class MerchantTest < MiniTest::Test
   end
 
   def test_it_returns_subset_of_total_revenue_given_a_date
-    date = Date.parse "Fri, 28 Mar 2012"
+    date = Date.parse "Mon, 12 Mar 2012"
     mar28_revenue = @second_merchant.revenue(date)
     assert_equal BigDecimal.new("5539.80"), mar28_revenue
   end
