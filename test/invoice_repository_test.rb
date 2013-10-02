@@ -93,4 +93,45 @@ class InvoiceRepositoryTest < MiniTest::Test
     assert_equal"Schroeder-Jerde", first_invoice_merchant.name  
   end
 
+  #invoice = invoice_repository.create(customer: customer, merchant: merchant, status: "shipped",
+                                      #items: [item1, item2, item3])
+  def test_it_can_create_a_new_invoice_when_sent_create_with_params
+    previous_invoice_count = @instance.all.count
+    # need to define customer, merchant, item1, item2 objects
+    customer1 = @instance.engine.customer_repository.find_by_id(1)
+    merchant1 = @instance.engine.merchant_repository.find_by_id(1)
+    item1 = @instance.engine.item_repository.find_by_id(1)
+    item2 = @instance.engine.item_repository.find_by_id(2)
+    @instance.create(customer: customer1,
+                     merchant: merchant1,
+                     status: "shipped",
+                     items: [item1, item1, item2])
+    assert_equal previous_invoice_count + 1, @instance.all.count
+  end
+   
+  def test_it_creates_new_invoice_with_proper_params
+    @instance.create()
+    new_invoice = @instance.all.last
+    assert_equal 12, new_invoice.id
+    assert_equal 1, new_invoice.customer_id
+    assert equal 1, new_invoice.merchant_id
+    assert_equal "shipped", new_invoice.status
+    assert_equal 3, new_invoice.invoice_items.length
+  end
+ 
+  def test_it_creates_two_related_invoice_items
+    skip
+    previous_invoice_item_count = @instance.engine.invoice_item_repository.all.count
+    @instance.create(customer: customer1,
+                     merchant: merchant1,
+                     status: "shipped",
+                     items: [item1, item1, item2])
+    new_invoice_item_count = @instance.engine.invoice_item_repository.all.count
+    assert_equal previous_invoice_item_count + 1, new_invoice_item_count 
+    assert_equal 12, @instance.engine.invoice_item_repository.all[-1].invoice_id
+    assert_equal item1.id, @instance.engine.invoice_item_repository.all[-1].item_id
+    assert_equal 2, @instance.engine.invoice_item_repository.all[-1].quantity
+    assert_equal 1, @instance.engine.invoice_item_repository.all[0].quantity
+  end
+
 end
