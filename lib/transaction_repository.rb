@@ -44,4 +44,10 @@ class TransactionRepository
   def random
     all.sample
   end
+
+  def create(input)
+    new_transaction = Transaction.new(input)
+    all << new_transaction
+  end
+
 end
