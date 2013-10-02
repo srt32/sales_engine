@@ -47,9 +47,7 @@ class TransactionRepository
 
   def create(input)
     new_transaction = Transaction.new(input)
-    binding.pry
     all << new_transaction
-    binding.pry
   end
 
 end
