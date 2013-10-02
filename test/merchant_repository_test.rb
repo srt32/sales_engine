@@ -68,7 +68,6 @@ class MerchantRepositoryTest < MiniTest::Test
   end
 
   def test_it_returns_top_merchant_when_sent_most_revenue
-    #mr = MerchantRepository.new("./data/merchants.csv",SalesEngine.new("./data"))  
     top_revenue_merchants = @mr.most_revenue(2)
     assert_kind_of Merchant, top_revenue_merchants.first
     assert_kind_of Array, top_revenue_merchants
@@ -77,6 +76,7 @@ class MerchantRepositoryTest < MiniTest::Test
   end
 
   def test_it_returns_merchant_collection_based_on_most_items_sold
+    #@mr = MerchantRepository.new("./data/merchants.csv",SalesEngine.new("./data"))  
     most_sold = @mr.most_items(2)
     assert_kind_of Array, most_sold
     assert_kind_of Merchant, most_sold.first

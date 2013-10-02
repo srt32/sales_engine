@@ -65,7 +65,11 @@ class Invoice
   end
   
   def quantity_of_items
-    invoice_items.reduce(0){|quantity,ii| quantity + ii.num_items}
+    if successful_charge?
+      invoice_items.reduce(0){|quantity,ii| quantity + ii.num_items}
+    else
+      0
+    end
   end
 
 end
