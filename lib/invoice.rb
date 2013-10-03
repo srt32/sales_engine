@@ -18,11 +18,11 @@ class Invoice
   end
 
   def created_at
-    @created_at ||= DateTime.strptime(@created_at_raw,"%Y-%m-%d %H:%M:%S").to_date
+    @created_at ||= DateTime.parse(@created_at_raw.to_s).to_date
   end
 
   def updated_at
-    @updated_at ||= DateTime.strptime(@created_at_raw,"%Y-%m-%d %H:%M:%S").to_date
+    @updated_at ||= DateTime.strptime(@updated_at_raw,"%Y-%m-%d %H:%M:%S").to_date
   end
 
   def transactions
