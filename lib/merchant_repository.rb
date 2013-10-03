@@ -44,19 +44,16 @@ class MerchantRepository
   end
 
   def most_revenue(amount)
-    merchants_totals = all.each_with_object(Hash.new(0)) do |merchant, total|
+    all.each_with_object(Hash.new(0)) do |merchant, total|
       total[merchant.id] = merchant.revenue
-    end
-    top_revenue_merchant_ids = merchants_totals.sort_by{|_,sum| sum}.reverse[0..amount-1]
-    winners = top_revenue_merchant_ids.collect{|merchant| find_by_id(merchant[0])}
+    end.sort_by{|_,sum| sum}.reverse[0..amount-1].collect{|merchant| find_by_id(merchant[0])}
   end
 
   def most_items(amount)
-    merchants_totals = all.each_with_object(Hash.new(0)) do |merchant, frequency|
+    top_selling_merchant_ids = all.each_with_object(Hash.new(0)) do |merchant, frequency|
       frequency[merchant.id] = merchant.items_successfully_sold
-    end
-    top_selling_merchant_ids = merchants_totals.sort_by{|_,count| count}.reverse[0..amount-1]
-    winners = top_selling_merchant_ids.collect{|merchant| find_by_id(merchant[0])}
+    end.sort_by{|_,count| count}.reverse[0..amount-1]
+    top_selling_merchant_ids.collect{|merchant| find_by_id(merchant[0])}
   end
 
   def revenue(date = "")
