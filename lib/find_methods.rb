@@ -14,9 +14,4 @@ module FindMethods
     end
   end
 
-# usage
-  # require_relative './find_methods'
-  # extend FindMethods
-  # self.create_finder_methods(attributes_string)
-
 end
