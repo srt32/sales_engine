@@ -33,12 +33,12 @@ class InvoiceRepository
   end
 
   def create(input)
-    new_invoice = Invoice.new(new_invoice_hash(input))  
+    new_invoice = Invoice.new(new_invoice_hash(input))
     all << new_invoice
     new_invoice.create_related_invoice_items(input[:items])
     return new_invoice
   end
-  
+
   def new_invoice_hash(input)
     {:id => all.max_by{|invoice| invoice.id}.id + 1,
                                :customer_id => input[:customer].id,
@@ -48,7 +48,7 @@ class InvoiceRepository
                                :updated_at => Time.now.to_date,
                                :invoice_repo_ref => self}
   end
-  
+
   %w(id customer_id merchant_id status created_at updated_at).each do |attribute|
     define_method("find_by_#{attribute}") do |criteria|
       all.find{|c| c.send(attribute).to_s == criteria.to_s}

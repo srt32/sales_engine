@@ -10,7 +10,7 @@ class TransactionRepository
     @engine = engine
   end
 
-  def all 
+  def all
     @all ||= create_transactions
   end
 
@@ -25,13 +25,13 @@ class TransactionRepository
                                             :transaction_repo_ref => self)}
   end
 
-  %w(id invoice_id credit_card_number result created_at updated_at).each do |attribute| 
+  %w(id invoice_id credit_card_number result created_at updated_at).each do |attribute|
     define_method("find_by_#{attribute}") do |criteria|
       all.find{|t| t.send(attribute).to_s == criteria.to_s}
     end
   end
 
-  %w(id invoice_id credit_card_number result created_at updated_at).each do |attribute| 
+  %w(id invoice_id credit_card_number result created_at updated_at).each do |attribute|
     define_method("find_all_by_#{attribute}") do |criteria|
     all.find_all{|t| t.send(attribute).to_s == criteria.to_s}
     end

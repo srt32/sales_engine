@@ -47,7 +47,7 @@ class InvoiceItem
   end
 
   def num_items
-    quantity.to_i 
+    quantity.to_i
   end
 
  end

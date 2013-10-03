@@ -1,10 +1,10 @@
 class Transaction
-  
-  attr_reader :id, 
-              :invoice_id, 
-              :credit_card_number, 
+
+  attr_reader :id,
+              :invoice_id,
+              :credit_card_number,
               :result,
-              :created_at, 
+              :created_at,
               :updated_at,
               :transaction_repo_ref
 
@@ -22,7 +22,7 @@ class Transaction
     transaction_repo_ref.engine.invoice_repository.find_by_id(self.invoice_id)
   end
 
-  def successful? 
+  def successful?
     result == "success" ? true : false
   end
 

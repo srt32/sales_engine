@@ -1,5 +1,5 @@
 class InvoiceItemRepository
-  
+
   attr_reader :file_path,
               :engine
 
@@ -9,7 +9,7 @@ class InvoiceItemRepository
   end
 
   def open_file
-    CSV.open file_path, headers: true    
+    CSV.open file_path, headers: true
   end
 
   def all
@@ -28,17 +28,17 @@ class InvoiceItemRepository
   end
 
   def random
-    all.sample 
+    all.sample
   end
- 
+
   %w(id item_id invoice_id quantity unit_price created_at updated_at).each do |attribute|
-    define_method("find_by_#{attribute}") do |criteria| 
+    define_method("find_by_#{attribute}") do |criteria|
       all.find{|c| c.send(attribute).to_s == criteria.to_s}
     end
   end
- 
+
   %w(id item_id invoice_id quantity unit_price created_at updated_at).each do |attribute|
-    define_method("find_all_by_#{attribute}") do |criteria| 
+    define_method("find_all_by_#{attribute}") do |criteria|
       all.find_all{|c| c.send(attribute).to_s == criteria.to_s}
     end
   end
@@ -58,5 +58,5 @@ class InvoiceItemRepository
   def create(input)
     all << InvoiceItem.new(input)
   end
-  
+
 end

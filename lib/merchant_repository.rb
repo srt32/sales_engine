@@ -24,7 +24,7 @@ class MerchantRepository
   end
 
   def open_file
-    CSV.open file_path, headers: true    
+    CSV.open file_path, headers: true
   end
 
   def random
@@ -32,13 +32,13 @@ class MerchantRepository
   end
 
   %w(id name created_at updated_at).each do |attribute|
-    define_method("find_by_#{attribute}") do |criteria| 
+    define_method("find_by_#{attribute}") do |criteria|
       all.find{|c| c.send(attribute).to_s == criteria.to_s}
     end
   end
- 
+
   %w(id name created_at updated_at).each do |attribute|
-    define_method("find_all_by_#{attribute}") do |criteria| 
+    define_method("find_all_by_#{attribute}") do |criteria|
       all.find_all{|c| c.send(attribute).to_s == criteria.to_s}
     end
   end
@@ -58,6 +58,6 @@ class MerchantRepository
 
   def revenue(date = "")
      all.reduce(0){|sum,merchant| sum += merchant.revenue(date)}
-  end    
-  
+  end
+
 end

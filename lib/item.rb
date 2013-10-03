@@ -27,7 +27,7 @@ class Item
   end
 
   def invoice_items
-    item_repo_ref.engine.invoice_item_repository.find_all_by_item_id(self.id) 
+    item_repo_ref.engine.invoice_item_repository.find_all_by_item_id(self.id)
   end
 
   def merchant
@@ -35,7 +35,7 @@ class Item
   end
 
   def best_day
-    invoice_items.each_with_object(Hash.new(0)) do |ii,daily_amt| 
+    invoice_items.each_with_object(Hash.new(0)) do |ii,daily_amt|
       daily_amt[ii.invoice.created_at] += ii.quantity.to_i
     end.sort_by{|_,value| value}.reverse[0][0]
   end

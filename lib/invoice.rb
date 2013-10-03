@@ -62,7 +62,7 @@ class Invoice
   def invoice_revenue
     self.invoice_items.reduce(0){|result,ii| ii.revenue + result}
   end
-  
+
   def quantity_of_items
     if successful_charge?
       invoice_items.reduce(0){|quantity,ii| quantity + ii.num_items}
@@ -72,9 +72,9 @@ class Invoice
   end
 
   def invoice_item_repo
-    invoice_repo_ref.engine.invoice_item_repository 
+    invoice_repo_ref.engine.invoice_item_repository
   end
-  
+
   def create_related_invoice_items(related_items)
     invoice_items_to_create(related_items).each do |item|
       invoice_item_repo.create(invoice_item_create_hash(item))

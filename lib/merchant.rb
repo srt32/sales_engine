@@ -29,7 +29,7 @@ class Merchant
   def invoice_items_within_range(date)
     invoice_items.flatten.select{|ii| date == "" ? true : ii.invoice.created_at == date}
   end
- 
+
   def invoice_items
     items.map(&:invoice_items)
   end
@@ -42,12 +42,12 @@ class Merchant
     successful_invoices.each_with_object(Hash.new(0)) do |invoice,cust_total|
       cust_total[invoice.customer_id] += 1
     end.sort_by{|_key,value| value}.reverse[0][0]
-  end 
+  end
 
-  def successful_invoices 
+  def successful_invoices
     invoices.select(&:successful_charge?)
   end
-    
+
   def customers_with_pending_invoices
     delinquent_customer_ids.collect{|c_id| customer_repository.find_by_id(c_id)}
   end
@@ -55,11 +55,11 @@ class Merchant
   def delinquent_customer_ids
     outstanding_invoices.collect(&:customer_id)
   end
-    
+
   def outstanding_invoices
      invoices.reject(&:successful_charge?)
   end
-    
+
   def items_successfully_sold
     invoices.reduce(0){|sum,invoice| sum += invoice.quantity_of_items}
   end
