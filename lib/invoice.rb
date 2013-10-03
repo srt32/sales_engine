@@ -25,14 +25,16 @@ class Invoice
     @updated_at ||= DateTime.strptime(@updated_at_raw,"%Y-%m-%d %H:%M:%S").to_date
   end
 
+  def transaction_repository
+    invoice_repo_ref.engine.transaction_repository
+  end
+
   def transactions
-   tr = invoice_repo_ref.engine.transaction_repository
-   tr.find_all_by_invoice_id(self.id)
+   transaction_repository.find_all_by_invoice_id(id)
   end
 
   def invoice_items
-    iir = invoice_repo_ref.engine.invoice_item_repository
-    iir.find_all_by_invoice_id(self.id)
+    invoice_repo_ref.engine.invoice_item_repository.find_all_by_invoice_id(id)
   end
 
   def items

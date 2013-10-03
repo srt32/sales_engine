@@ -16,19 +16,21 @@ class Customer
     @customer_repo_ref = input[:customer_repo_ref]
   end
 
+  def invoice_repository
+    customer_repo_ref.engine.invoice_repository
+  end
+
   def invoices
-    customer_repo_ref.engine.invoice_repository.find_all_by_customer_id(self.id)
+   invoice_repository.find_all_by_customer_id(id)
   end
 
   def transactions
-    invoices = customer_repo_ref.engine.invoice_repository.find_all_by_customer_id(self.id)
-    transactions = invoices.collect {|invoice| invoice.transactions}
-    transactions.flatten
+    invoices = invoice_repository.find_all_by_customer_id(id)
+    invoices.collect(&:transactions).flatten
   end
 
   def favorite_merchant
-    successful_transactions = transactions.select{|t| t.successful?} 
-    invoices = successful_transactions.collect {|t| t.invoice}
+    invoices = transactions.select(&:successful?).collect(&:invoice)
     merchant_invoices_totals = invoices.each_with_object(Hash.new(0)) do |invoice,merch_total|
       merch_total[invoice.merchant_id] += 1
     end

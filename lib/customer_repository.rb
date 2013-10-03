@@ -31,8 +31,7 @@ class CustomerRepository
   end
 
   def create_customers
-    csv_data = open_file
-    all = csv_data.collect{|row| Customer.new(:id => row["id"],
+    all = open_file.collect{|row| Customer.new(:id => row["id"],
       :first_name => row["first_name"],
       :last_name => row["last_name"],
       :created_at => row["created_at"],
