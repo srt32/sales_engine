@@ -35,24 +35,36 @@ class ItemRepository
     all.sample
   end
 
-  %w(id name description unit_price merchant_id created_at updated_at).each do |attribute|
+  def self.attributes_string
+    %w(id name description unit_price merchant_id created_at updated_at)
+  end
+
+  attributes_string.each do |attribute|
     define_method("find_by_#{attribute}") do |criteria|
       all.find{|c| c.send(attribute).to_s == criteria.to_s}
     end
   end
 
-  %w(id name description unit_price merchant_id created_at updated_at).each do |attribute|
+  attributes_string.each do |attribute|
     define_method("find_all_by_#{attribute}") do |criteria|
       all.find_all{|c| c.send(attribute).to_s == criteria.to_s}
     end
   end
 
   def most_items(amount)
-    engine.invoice_item_repository.total_quantity_sold[0..amount-1].collect {|item| self.find_by_id(item[0])}
+    invoice_item_repository.total_quantity_sold[0..amount-1].collect do |item| 
+      find_by_id(item[0])
+    end
   end
 
   def most_revenue(amount)
-    engine.invoice_item_repository.total_revenue_sold[0..amount-1].collect {|item| self.find_by_id(item[0])}
+    invoice_item_repository.total_revenue_sold[0..amount-1].collect do |item| 
+      find_by_id(item[0])
+    end
+  end
+
+  def invoice_item_repository
+    engine.invoice_item_repository
   end
 
 end

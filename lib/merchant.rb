@@ -23,11 +23,15 @@ class Merchant
   end
 
   def revenue(date = "")
-    invoice_items_within_range(date).reduce(0) {|sum,invoice_item| sum + invoice_item.revenue}
+    invoice_items_within_range(date).reduce(0) do |sum,invoice_item| 
+      sum + invoice_item.revenue
+    end
   end
 
   def invoice_items_within_range(date)
-    invoice_items.flatten.select{|ii| date == "" ? true : ii.invoice.created_at == date}
+    invoice_items.flatten.select do 
+      |ii| date == "" ? true : ii.invoice.created_at == date
+    end
   end
 
   def invoice_items

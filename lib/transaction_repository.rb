@@ -15,25 +15,31 @@ class TransactionRepository
   end
 
   def create_transactions
-    csv_data.collect {|row| Transaction.new(:id => row["id"],
-                                            :invoice_id => row["invoice_id"],
-                                            :credit_card_number => row["credit_card_number"],
-                                            :result => row["result"],
-                                            :name => row["name"],
-                                            :created_at => row["created_at"],
-                                            :updated_at => row["updated_at"],
-                                            :transaction_repo_ref => self)}
+    csv_data.collect do |row|
+      Transaction.new(:id => row["id"],
+                      :invoice_id => row["invoice_id"],
+                      :credit_card_number => row["credit_card_number"],
+                      :result => row["result"],
+                      :name => row["name"],
+                      :created_at => row["created_at"],
+                      :updated_at => row["updated_at"],
+                      :transaction_repo_ref => self)
+    end
   end
 
-  %w(id invoice_id credit_card_number result created_at updated_at).each do |attribute|
+  def self.attributes_string
+    %w(id invoice_id credit_card_number result created_at updated_at)
+  end
+
+  attributes_string.each do |attribute|
     define_method("find_by_#{attribute}") do |criteria|
       all.find{|t| t.send(attribute).to_s == criteria.to_s}
     end
   end
 
-  %w(id invoice_id credit_card_number result created_at updated_at).each do |attribute|
+  attributes_string.each do |attribute|
     define_method("find_all_by_#{attribute}") do |criteria|
-    all.find_all{|t| t.send(attribute).to_s == criteria.to_s}
+      all.find_all{|t| t.send(attribute).to_s == criteria.to_s}
     end
   end
 

@@ -33,6 +33,10 @@ class Invoice
     invoice_repo_ref.engine.invoice_item_repository
   end
 
+  def invoice_repository
+    invoice_repo_ref.engine.invoice_repository
+  end
+
   def transactions
    transaction_repository.find_all_by_invoice_id(id)
   end
@@ -101,13 +105,14 @@ class Invoice
   end
 
   def transaction_create_hash(input)
-    {:id => invoice_repo_ref.engine.invoice_repository.all.max_by{|inv| inv.id}.id + 1,
-                               :invoice_id => self.id,
-                               :credit_card_number => input[:credit_card_number],
-                               :result => input[:result],
-                               :created_at => Time.now.to_date,
-                               :updated_at => Time.now.to_date,
-                               :transaction_repo_ref => invoice_repo_ref.engine.transaction_repository}
+    new_id = invoice_repository.all.max_by{|inv| inv.id}.id + 1
+    {:id => new_id,
+     :invoice_id => self.id,
+     :credit_card_number => input[:credit_card_number],
+     :result => input[:result],
+     :created_at => Time.now.to_date,
+     :updated_at => Time.now.to_date,
+     :transaction_repo_ref => invoice_repo_ref.engine.transaction_repository}
   end
 
 end
