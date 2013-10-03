@@ -1,6 +1,8 @@
 require_relative './transaction'
+require_relative './find_methods'
 
 class TransactionRepository
+  extend FindMethods
 
   attr_reader :file_path,
               :engine
@@ -31,19 +33,7 @@ class TransactionRepository
     %w(id invoice_id credit_card_number result created_at updated_at)
   end
 
-  attributes_string.each do |attribute|
-    define_method("find_by_#{attribute}") do |criteria|
-      all.find{|t| t.send(attribute).to_s == criteria.to_s}
-    end
-  end
-
-  attributes_string.each do |attribute|
-    define_method("find_all_by_#{attribute}") do |criteria|
-      all.find_all{|t| t.send(attribute).to_s == criteria.to_s}
-    end
-  end
-
-  def csv_data
+   def csv_data
     CSV.open file_path, headers: true
   end
 
@@ -55,4 +45,5 @@ class TransactionRepository
     all << Transaction.new(input)
   end
 
+  self.create_finder_methods(attributes_string)
 end

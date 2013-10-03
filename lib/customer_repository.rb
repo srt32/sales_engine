@@ -1,6 +1,8 @@
 require 'csv'
+require_relative './find_methods'
 
 class CustomerRepository
+  extend FindMethods
 
   attr_reader :file_path,
               :engine
@@ -18,16 +20,8 @@ class CustomerRepository
     all.sample
   end
 
-  %w(id first_name last_name created_at updated_at).each do |attribute|
-    define_method("find_by_#{attribute}") do |criteria|
-      all.find{|c| c.send(attribute).to_s == criteria.to_s}
-    end
-  end
-
-  %w(id first_name last_name created_at updated_at).each do |attribute|
-    define_method("find_all_by_#{attribute}") do |criteria|
-      all.find_all{|c| c.send(attribute).to_s == criteria.to_s}
-    end
+  def self.attributes_string
+    %w(id first_name last_name created_at updated_at)
   end
 
   def create_customers
@@ -43,4 +37,5 @@ class CustomerRepository
     CSV.open file_path, headers: true
   end
 
+  self.create_finder_methods(attributes_string)
 end
