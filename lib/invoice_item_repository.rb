@@ -17,8 +17,7 @@ class InvoiceItemRepository
   end
 
   def create_invoice_items
-    csv_data = open_file
-    all = csv_data.collect{|row| InvoiceItem.new(:id => row["id"],
+    open_file.collect{|row| InvoiceItem.new(:id => row["id"],
                                               :item_id => row["item_id"],
                                               :invoice_id => row["invoice_id"],
                                               :quantity => row["quantity"],
@@ -45,22 +44,19 @@ class InvoiceItemRepository
   end
 
   def total_quantity_sold
-    totals = all.each_with_object(Hash.new(0)) do |ii, frequencies|
+    all.each_with_object(Hash.new(0)) do |ii, frequencies|
       frequencies[ii.item_id] += ii.quantity.to_i if ii.successful_charge?
-    end
-    sorted_totals = totals.sort_by{|_,frequency| -frequency}
+    end.sort_by{|_,frequency| -frequency}
   end
 
   def total_revenue_sold
-    totals = self.all.each_with_object(Hash.new(0)) do |ii, ii_revenue|
+    all.each_with_object(Hash.new(0)) do |ii, ii_revenue|
       ii_revenue[ii.item_id] += ii.revenue
-    end
-    sorted_totals = totals.sort_by{|_key,value| value}.reverse
+    end.sort_by{|_key,value| -value}
   end
 
   def create(input)
-    new_invoice_item = InvoiceItem.new(input)
-    all << new_invoice_item
+    all << InvoiceItem.new(input)
   end
   
 end
