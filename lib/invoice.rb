@@ -29,37 +29,34 @@ class Invoice
     invoice_repo_ref.engine.transaction_repository
   end
 
+  def invoice_item_repository
+    invoice_repo_ref.engine.invoice_item_repository
+  end
+
   def transactions
    transaction_repository.find_all_by_invoice_id(id)
   end
 
   def invoice_items
-    invoice_repo_ref.engine.invoice_item_repository.find_all_by_invoice_id(id)
+   invoice_item_repository.find_all_by_invoice_id(id)
   end
 
   def items
-    iir = invoice_repo_ref.engine.invoice_item_repository
-    invoice_items = iir.find_all_by_invoice_id(self.id)
-    items = []
-    invoice_items.each do |ii|
-      item = invoice_repo_ref.engine.item_repository.find_by_id(ii.item_id)
-      items << item unless item.nil?
-    end
-    return items
+    items = invoice_item_repository.find_all_by_invoice_id(id).map do |ii|
+      invoice_repo_ref.engine.item_repository.find_by_id(ii.item_id)
+    end.reject(&:nil?)
   end
 
   def customer
-    cr = invoice_repo_ref.engine.customer_repository
-    cr.find_by_id(self.customer_id)
+    invoice_repo_ref.engine.customer_repository.find_by_id(customer_id)
   end
 
   def merchant
-    mr = invoice_repo_ref.engine.merchant_repository
-    mr.find_by_id(self.merchant_id)
+    invoice_repo_ref.engine.merchant_repository.find_by_id(merchant_id)
   end
 
   def successful_charge?
-    self.transactions.any?{|t| t.successful?}
+    self.transactions.any?(&:successful?)
   end
 
   def invoice_revenue
@@ -79,30 +76,38 @@ class Invoice
   end
   
   def create_related_invoice_items(related_items)
-    invoice_items_to_create = related_items.each_with_object(Hash.new(0)) do |item,quantities|
-      quantities[item.id] += 1
+    invoice_items_to_create(related_items).each do |item|
+      invoice_item_repo.create(invoice_item_create_hash(item))
     end
-    
-    invoice_items_to_create.each do |item|
-      invoice_item_create_hash = {:id => invoice_item_repo.all.max_by{|ii| ii.id}.id + 1,
+  end
+
+  def invoice_item_create_hash(item)
+     {:id => invoice_item_repo.all.max_by{|ii| ii.id}.id + 1,
                                   :item_id => item[0],
-                                  :invoice_id => self.id,
+                                  :invoice_id => id,
                                   :quantity => item[1],
                                   :unit_price => "100",
                                   :invoice_item_repo_ref => invoice_item_repo}
-      invoice_item_repo.create(invoice_item_create_hash)
+  end
+
+  def invoice_items_to_create(related_items)
+     related_items.each_with_object(Hash.new(0)) do |item,quantities|
+      quantities[item.id] += 1
     end
   end
 
   def charge(input)
-    transaction_create_hash = {:id => invoice_repo_ref.engine.invoice_repository.all.max_by{|inv| inv.id}.id + 1,
+    transaction_repository.create(transaction_create_hash(input))
+  end
+
+  def transaction_create_hash(input)
+    {:id => invoice_repo_ref.engine.invoice_repository.all.max_by{|inv| inv.id}.id + 1,
                                :invoice_id => self.id,
                                :credit_card_number => input[:credit_card_number],
                                :result => input[:result],
                                :created_at => Time.now.to_date,
                                :updated_at => Time.now.to_date,
                                :transaction_repo_ref => invoice_repo_ref.engine.transaction_repository}
-    invoice_repo_ref.engine.transaction_repository.create(transaction_create_hash)
   end
 
 end
