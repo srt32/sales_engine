@@ -31,25 +31,19 @@ class InvoiceItem
   end
 
   def invoice
-    ir = invoice_item_repo_ref.engine.invoice_repository
-    ir.find_by_id(self.invoice_id)
+    invoice_item_repo_ref.engine.invoice_repository.find_by_id(self.invoice_id)
   end
 
   def item
-    item_repo = invoice_item_repo_ref.engine.item_repository
-    item_repo.find_by_id(self.item_id)
+    invoice_item_repo_ref.engine.item_repository.find_by_id(self.item_id)
   end
 
   def revenue
-    if self.invoice.successful_charge?
-      self.quantity.to_i * self.unit_price
-    else
-      BigDecimal.new("0.00")
-    end
+    invoice.successful_charge? ? quantity.to_i * unit_price : 0
   end
 
   def successful_charge?
-    self.invoice.successful_charge?
+    invoice.successful_charge?
   end
 
   def num_items
