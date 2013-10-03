@@ -1,4 +1,7 @@
+require_relative './find_methods'
+
 class InvoiceItemRepository
+  extend FindMethods
 
   attr_reader :file_path,
               :engine
@@ -35,19 +38,7 @@ class InvoiceItemRepository
     %w(id item_id invoice_id quantity unit_price created_at updated_at)
   end
 
-  attributes_string.each do |attribute|
-    define_method("find_by_#{attribute}") do |criteria|
-      all.find{|c| c.send(attribute).to_s == criteria.to_s}
-    end
-  end
-
-  attributes_string.each do |attribute|
-    define_method("find_all_by_#{attribute}") do |criteria|
-      all.find_all{|c| c.send(attribute).to_s == criteria.to_s}
-    end
-  end
-
-  def total_quantity_sold
+   def total_quantity_sold
     all.each_with_object(Hash.new(0)) do |ii, frequencies|
       frequencies[ii.item_id] += ii.quantity.to_i if ii.successful_charge?
     end.sort_by{|_,frequency| -frequency}
@@ -62,5 +53,7 @@ class InvoiceItemRepository
   def create(input)
     all << InvoiceItem.new(input)
   end
+
+  self.create_finder_methods(attributes_string)
 
 end
