@@ -20,7 +20,6 @@ class SalesEngine
   end
 
   def startup
-    
   end
 
   def customer_repository(filepath= "#{data}/customers.csv")

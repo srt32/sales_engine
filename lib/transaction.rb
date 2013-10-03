@@ -19,16 +19,11 @@ class Transaction
   end
 
   def invoice
-    invoice_repo = transaction_repo_ref.engine.invoice_repository
-    invoice_repo.find_by_id(self.invoice_id)
+    transaction_repo_ref.engine.invoice_repository.find_by_id(self.invoice_id)
   end
 
   def successful? 
-   if self.result == "success"
-      true
-    else
-      false
-    end
+    result == "success" ? true : false
   end
 
 end
