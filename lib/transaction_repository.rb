@@ -46,8 +46,7 @@ class TransactionRepository
   end
 
   def create(input)
-    new_transaction = Transaction.new(input)
-    all << new_transaction
+    all << Transaction.new(input)
   end
 
 end
