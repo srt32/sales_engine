@@ -13,15 +13,6 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal "./test/fixtures/customers.csv", @cr.file_path
   end
 
-  def test_open_file_has_default_file_path
-    loaded_data = @cr.open_file
-    assert_kind_of CSV, loaded_data
-  end
-
-  def test_it_has_an_all_method
-    assert_respond_to @cr, :all
-  end
-
   def test_it_populates_all_array_from_csv
      assert_equal 5, @cr.all.count
   end

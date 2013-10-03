@@ -9,19 +9,6 @@ class InvoiceItemRepositoryTest < Minitest::Test
     @dummy_date = Date.parse "Fri, 27 Mar 2012"
   end
 
-  def test_it_is_initialized_with_a_filepath
-    assert_equal "./test/fixtures/invoice_items.csv", @iir.file_path
-  end
-
-  def test_open_file_has_default_file_path
-    loaded_data = @iir.open_file
-    assert_kind_of CSV, loaded_data
-  end
-
-  def test_it_has_an_all_method
-    assert_respond_to @iir, :all
-  end
-
   def test_it_populates_all_array_from_csv
     assert_equal 11, @iir.all.count
   end

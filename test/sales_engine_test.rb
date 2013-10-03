@@ -8,14 +8,6 @@ class SalesEngineTest < MiniTest::Test
     @se = SalesEngine.new
   end
 
-  def test_it_exists
-    assert_kind_of SalesEngine, @se  
-  end
-
-  def test_it_responds_to_startup
-    assert_respond_to @se, :startup
-  end
-
   def test_it_responds_to_customer_repository
     assert_respond_to @se, :customer_repository
   end

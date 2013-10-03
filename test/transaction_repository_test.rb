@@ -11,10 +11,6 @@ class TransactionRepositoryTest < Minitest::Test
     @instance = TransactionRepository.new("./test/fixtures/transactions.csv",SalesEngine.new("./test/fixtures"))
   end
 
-  def test_that_filepath_is_initialized
-    assert_equal "./test/fixtures/transactions.csv", @instance.file_path
-  end
-
   def test_that_repo_is_populated_with_data
     assert_equal 11, @instance.all.count
   end

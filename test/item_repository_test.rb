@@ -8,10 +8,6 @@ class ItemRepositoryTest < Minitest::Test
     @ir = ItemRepository.new("./test/fixtures/items.csv",SalesEngine.new("./test/fixtures"))
   end
 
-  def test_it_is_initialized_with_a_filepath
-    assert_equal "./test/fixtures/items.csv", @ir.file_path
-  end
-
   def test_it_populates_all_array_from_csv
     assert_equal 4, @ir.all.count
   end

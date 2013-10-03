@@ -8,10 +8,6 @@ class MerchantRepositoryTest < MiniTest::Test
     @mr = MerchantRepository.new("./test/fixtures/merchants.csv",SalesEngine.new("./test/fixtures"))
   end
 
-  def test_it_is_initialized_with_a_filepath
-    assert_equal "./test/fixtures/merchants.csv", @mr.file_path
-  end
-
   def test_it_populates_all_array_from_csv
     assert_equal 6, @mr.all.count
   end
