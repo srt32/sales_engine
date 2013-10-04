@@ -45,5 +45,5 @@ class TransactionRepository
     all << Transaction.new(input)
   end
 
-  self.create_finder_methods(attributes_string)
+  create_finder_methods(attributes_string)
 end

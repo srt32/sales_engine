@@ -11,10 +11,15 @@ module FindMethods
       end
     end
 
+    #def self.grouped_by_id
+    #  self.all.group_by{|object| object.send(id)}
+    #end
+
+
     attributes_string.each do |attribute|
       define_method("find_by_#{attribute}") do |criteria|
         #all.find{|c| c.send(attribute).to_s == criteria.to_s}
-        self.class.send("grouped_by_#{attribute}")[criteria.to_s] || []
+        send("grouped_by_#{attribute}")[criteria.to_s] || []
       end
     end
     
