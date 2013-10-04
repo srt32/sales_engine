@@ -1,8 +1,10 @@
 require 'csv'
 require_relative './find_methods'
+require_relative './clear_cache'
 
 class CustomerRepository
   extend FindMethods
+  include ClearCache
 
   attr_reader :file_path,
               :engine
@@ -38,4 +40,5 @@ class CustomerRepository
   end
 
   self.create_finder_methods(attributes_string)
+
 end

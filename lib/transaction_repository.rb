@@ -1,8 +1,10 @@
 require_relative './transaction'
 require_relative './find_methods'
+require_relative './clear_cache'
 
 class TransactionRepository
   extend FindMethods
+  include ClearCache
 
   attr_reader :file_path,
               :engine
@@ -43,8 +45,9 @@ class TransactionRepository
 
   def create(input)
     all << Transaction.new(input)
-    # redo the caching
+    clear_cache
   end
 
   create_finder_methods(attributes_string)
+
 end

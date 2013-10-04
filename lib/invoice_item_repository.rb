@@ -1,7 +1,9 @@
 require_relative './find_methods'
+require_relative './clear_cache'
 
 class InvoiceItemRepository
   extend FindMethods
+  include ClearCache
 
   attr_reader :file_path,
               :engine
@@ -52,6 +54,7 @@ class InvoiceItemRepository
 
   def create(input)
     all << InvoiceItem.new(input)
+    clear_cache
   end
 
   self.create_finder_methods(attributes_string)

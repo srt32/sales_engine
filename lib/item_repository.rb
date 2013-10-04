@@ -1,9 +1,11 @@
 require 'csv'
 require_relative './item'
 require_relative './find_methods'
+require_relative './clear_cache'
 
 class ItemRepository
   extend FindMethods
+  include ClearCache
 
   attr_reader :file_path,
               :engine

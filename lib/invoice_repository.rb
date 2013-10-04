@@ -1,8 +1,10 @@
 require 'csv'
 require_relative './find_methods'
+require_relative './clear_cache'
 
 class InvoiceRepository
   extend FindMethods
+  include ClearCache
 
   attr_reader :file_path,
               :engine
