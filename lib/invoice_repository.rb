@@ -39,6 +39,7 @@ class InvoiceRepository
   def create(input)
     new_invoice = Invoice.new(new_invoice_hash(input))
     all << new_invoice
+    clear_cache
     new_invoice.create_related_invoice_items(input[:items])
     return new_invoice
   end

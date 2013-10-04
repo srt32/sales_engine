@@ -40,7 +40,7 @@ class InvoiceItemRepository
     %w(id item_id invoice_id quantity unit_price created_at updated_at)
   end
 
-   def total_quantity_sold
+  def total_quantity_sold
     all.each_with_object(Hash.new(0)) do |ii, frequencies|
       frequencies[ii.item_id] += ii.quantity.to_i if ii.successful_charge?
     end.sort_by{|_,frequency| -frequency}
@@ -53,8 +53,8 @@ class InvoiceItemRepository
   end
 
   def create(input)
-    all << InvoiceItem.new(input)
     clear_cache
+    all << InvoiceItem.new(input)
   end
 
   self.create_finder_methods(attributes_string)
