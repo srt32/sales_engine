@@ -43,6 +43,7 @@ class TransactionRepository
 
   def create(input)
     all << Transaction.new(input)
+    # redo the caching
   end
 
   create_finder_methods(attributes_string)
